@@ -2,6 +2,9 @@ export async function fetchNumberofUsers() {
   try {
     const response = await fetch(`${process.env.V1_API}/get_player_count`, {
       method: "GET",
+      next: {
+        revalidate: 300,
+      },
     }).then((res) => {
       return res;
     });
