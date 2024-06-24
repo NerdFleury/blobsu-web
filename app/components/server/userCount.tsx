@@ -4,7 +4,7 @@ export default async function UserCount() {
   const data = await fetchNumberofUsers();
   return (
     <main>
-      <p>Number of users present: {data} </p>
+      <p>Number of users online: {data} </p>
     </main>
   );
 }
