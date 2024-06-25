@@ -9,6 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/core": "^7.10.2",
+    "@mantine/hooks": "^7.10.2",
+    "@mantine/tiptap": "^7.10.2",
+    "@tabler/icons-react": "^3.6.0",
+    "@tiptap/extension-link": "^2.4.0",
+    "@tiptap/react": "^2.4.0",
+    "@tiptap/starter-kit": "^2.4.0",
     "mysql2": "^3.10.1",
     "net": "^1.0.2",
     "next": "14.2.4",

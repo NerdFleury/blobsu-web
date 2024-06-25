@@ -1,16 +1,6 @@
-import { NextApiRequest } from "next";
-import { FormEvent } from "react";
-import { json } from "stream/consumers";
-
-interface User {
-  username: string;
-  user_email: string;
-  password: string;
-}
-
 export default async function HandeSubmit(user: URLSearchParams) {
   try {
-    const response = await fetch(`${process.env.OSU_API}/users`, {
+    await fetch("https://osu.blobsu.xyz/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
