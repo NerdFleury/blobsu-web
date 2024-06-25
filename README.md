@@ -1,1 +1,1 @@
-A frontend web application for Blobsu that is in progress
+A frontend web application for Blobsu, a private osu server, that is in progress
