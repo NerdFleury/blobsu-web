@@ -102,8 +102,8 @@ export default function CreateAccount({
       user.append("user[user_email]", email);
       user.append("user[password]", pass);
       user.append("check", "0");
+      console.log(user);
       handleSubmit(user);
-      router.push("/");
     }
   };
 
