@@ -8,7 +8,9 @@ export default function LeaderboardPage() {
   const searchParams = useSearchParams();
   return (
     <>
-      <Leaderboard searchParams={searchParams} />
+      <Suspense>
+        <Leaderboard searchParams={searchParams} />
+      </Suspense>
     </>
   );
 }
