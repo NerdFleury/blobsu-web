@@ -14,6 +14,7 @@ import {
   Group,
   Button,
 } from "@mantine/core";
+import { useRouter } from "next/navigation";
 
 interface UserFormData {
   username: string;
@@ -36,6 +37,8 @@ export default function CreateAccount({
 }: {
   handleSubmit: Function;
 }) {
+  const router = useRouter();
+
   const [formData, setFormData] = useState<UserFormData>({
     username: "",
     user_email: "",
@@ -100,6 +103,7 @@ export default function CreateAccount({
       user.append("user[password]", pass);
       user.append("check", "0");
       handleSubmit(user);
+      router.push("/");
     }
   };
 

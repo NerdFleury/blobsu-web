@@ -1,4 +1,6 @@
-import { redirect } from "next/navigation";
+"use server";
+
+import { permanentRedirect, redirect } from "next/navigation";
 
 //why is next js like this
 
@@ -14,10 +16,8 @@ export async function handleSubmit(user: URLSearchParams) {
       return res;
     });
     const confirm = await response.json();
-    console.log(confirm);
-    redirect("/");
+    return confirm;
   } catch (error) {
     console.error(error);
-    alert("API error: Registration failed. Please try again.");
   }
 }

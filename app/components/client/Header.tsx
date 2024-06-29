@@ -6,6 +6,7 @@ import { IconChevronDown } from "@tabler/icons-react";
 import { IconCircleNumber0 } from "@tabler/icons-react";
 import { IconStar } from "@tabler/icons-react";
 import classes from "../styles/Headers.module.css";
+import Link from "next/link";
 
 const links = [
   { link: "/leaderboard", label: "Leaderboard" },
@@ -39,7 +40,7 @@ export function HeaderMenu() {
           withinPortal
         >
           <Menu.Target>
-            <a
+            <Link
               href={link.link}
               className={classes.link}
               onClick={(event) => event.preventDefault()}
@@ -48,7 +49,7 @@ export function HeaderMenu() {
                 <span className={classes.linkLabel}>{link.label}</span>
                 <IconChevronDown size="0.9rem" stroke={1.5} />
               </Center>
-            </a>
+            </Link>
           </Menu.Target>
           <Menu.Dropdown>{menuItems}</Menu.Dropdown>
         </Menu>
@@ -56,14 +57,9 @@ export function HeaderMenu() {
     }
 
     return (
-      <a
-        key={link.label}
-        href={link.link}
-        className={classes.link}
-        onClick={(event) => event.preventDefault()}
-      >
+      <Link key={link.label} href={link.link} className={classes.link}>
         {link.label}
-      </a>
+      </Link>
     );
   });
 
