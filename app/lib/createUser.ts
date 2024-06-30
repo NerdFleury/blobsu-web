@@ -44,9 +44,9 @@ export async function handleSubmit(prevState: any, user: FormData) {
   }
 
   const userdata = new URLSearchParams();
-  userdata.append("user[username]", user.get("name")!);
-  userdata.append("user[user_email]", user.get("email")!);
-  userdata.append("user[password]", user.get("password")!);
+  userdata.append("user[username]", user.get("name")!.toString());
+  userdata.append("user[user_email]", user.get("email")!.toString());
+  userdata.append("user[password]", user.get("password")!.toString());
   userdata.append("check", "0");
 
   try {
