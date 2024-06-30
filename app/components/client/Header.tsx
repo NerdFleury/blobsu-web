@@ -9,7 +9,8 @@ import classes from "../styles/Headers.module.css";
 import Link from "next/link";
 
 const links = [
-  { link: "/leaderboard", label: "Leaderboard" },
+  { link: "/", label: "Home" },
+  { link: "/leaderboard?sort=pp&mode=0&pagenumber=1", label: "Leaderboard" },
   {
     link: "#1",
     label: "Connect",

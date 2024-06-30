@@ -5,11 +5,10 @@ import {
   TableTh,
   TableThead,
   TableTr,
-  Title,
-  Center,
 } from "@mantine/core";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface leaderboard {
   player_id: number;
@@ -49,17 +48,19 @@ async function fetchGlobal({
   pageNumber: number;
 }) {
   offset = 50 * (pageNumber - 1);
+  let data;
   try {
     const response = await fetch(
       `https://api.blobsu.xyz/v1/get_leaderboard?sort=${sort}&mode=${mode}&limit=50&offset=${offset}`,
       {
         method: "GET",
+        cache: "no-store",
       }
     ).then((res) => {
       console.log(res);
       return res;
     });
-    const data = await response.json();
+    data = await response.json();
     return data;
   } catch (error) {
     console.log(error);
@@ -105,23 +106,23 @@ export default function Leaderboard({
 }: {
   searchParams: ReadonlyURLSearchParams;
 }) {
+  const router = useRouter();
   const [leaderboard, setLeaderboard] = useState<data>();
   useEffect(() => {
     const fetchData = async () => {
       const res = await getLeaderboard(searchParams);
       setLeaderboard(res!);
+      console.log(searchParams);
+      router.refresh();
     };
 
     fetchData().catch((e) => {
       console.error("an error has occured");
     });
-  }, []);
+  }, [searchParams]);
 
   return (
     <div>
-      <Center mb={"3em"} mt={"2em"}>
-        <Title>Global Leaderboards</Title>
-      </Center>
       <Table align="center" maw={"80%"}>
         <TableThead>
           <TableTr>

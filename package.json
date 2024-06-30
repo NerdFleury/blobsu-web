@@ -10,18 +10,21 @@
   },
   "dependencies": {
     "@mantine/core": "^7.10.2",
+    "@mantine/form": "^7.11.0",
     "@mantine/hooks": "^7.10.2",
     "@mantine/tiptap": "^7.10.2",
     "@tabler/icons-react": "^3.6.0",
     "@tiptap/extension-link": "^2.4.0",
     "@tiptap/react": "^2.4.0",
     "@tiptap/starter-kit": "^2.4.0",
+    "mantine-form-zod-resolver": "^1.1.0",
     "mysql2": "^3.10.1",
     "net": "^1.0.2",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
-    "tls": "^0.0.1"
+    "tls": "^0.0.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20.14.2",

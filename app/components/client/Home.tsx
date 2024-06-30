@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button, Title, Stack } from "@mantine/core";
+import { Button, Title, Stack, Text } from "@mantine/core";
 
 export default function Home({ children }: { children: React.ReactNode }) {
   return (
