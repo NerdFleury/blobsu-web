@@ -4,6 +4,7 @@ import { Button, Center, Group, Stack, Table, Text } from "@mantine/core";
 import { Suspense, useEffect, useState } from "react";
 import { Plays } from "@/app/components/server/playerTable";
 import { StatsCard } from "@/app/components/server/userInfo";
+import { LoadingDef } from "../client/DefaultLoading";
 import { useRouter } from "next/navigation";
 
 interface Beatmap {
@@ -199,7 +200,7 @@ export default function Page({
 
   return (
     <>
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<LoadingDef />}>
         <Stack align="center">
           {userData ? (
             <StatsCard
@@ -210,7 +211,9 @@ export default function Page({
               acc={userData!.stats[mode].acc}
               region={userData!.info.country}
             />
-          ) : null}
+          ) : (
+            <LoadingDef />
+          )}
         </Stack>
       </Suspense>
       <Group mt="xl" justify="center">
@@ -230,8 +233,10 @@ export default function Page({
           Relax
         </Button>
       </Group>
-      <Suspense fallback={<p>Loading...</p>}>
-        <Center>{scoreData ? <Plays scores={scoreData} /> : null}</Center>
+      <Suspense fallback={<LoadingDef />}>
+        <Center>
+          {scoreData ? <Plays scores={scoreData} /> : <LoadingDef />}
+        </Center>
       </Suspense>
     </>
   );
