@@ -5,10 +5,11 @@ import {
   TableTh,
   TableThead,
   TableTr,
+  UnstyledButton,
 } from "@mantine/core";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface leaderboard {
   player_id: number;
@@ -106,14 +107,11 @@ export default function Leaderboard({
 }: {
   searchParams: ReadonlyURLSearchParams;
 }) {
-  const router = useRouter();
   const [leaderboard, setLeaderboard] = useState<data>();
   useEffect(() => {
     const fetchData = async () => {
       const res = await getLeaderboard(searchParams);
       setLeaderboard(res!);
-      console.log(searchParams);
-      router.refresh();
     };
 
     fetchData().catch((e) => {
@@ -123,7 +121,7 @@ export default function Leaderboard({
 
   return (
     <div>
-      <Table align="center" maw={"80%"}>
+      <Table align="center" maw={"60%"} highlightOnHover withRowBorders={false}>
         <TableThead>
           <TableTr>
             <TableTh>Rank</TableTh>
@@ -131,16 +129,26 @@ export default function Leaderboard({
             <TableTh>Player</TableTh>
             <TableTh>Play Count</TableTh>
             <TableTh>Accuracy</TableTh>
-            <TableTh>Performance Points</TableTh>
+            <TableTh>PP</TableTh>
           </TableTr>
         </TableThead>
         <TableTbody>
           {leaderboard
             ? leaderboard.leaderboard.map((player, index) => (
-                <TableTr key={player.name}>
+                <TableTr style={{ borderRadius: 20 }} key={player.name}>
                   <TableTd>#{offset + index + 1}</TableTd>
                   <TableTd>{player.country}</TableTd>
-                  <TableTd>{player.name}</TableTd>
+
+                  <TableTd>
+                    {" "}
+                    <UnstyledButton
+                      component={Link}
+                      href={`/user/${player.player_id}`}
+                    >
+                      {player.name}
+                    </UnstyledButton>
+                  </TableTd>
+
                   <TableTd>{player.plays}</TableTd>
                   <TableTd>{player.acc.toFixed(2)}%</TableTd>
                   <TableTd>{player.pp}</TableTd>
