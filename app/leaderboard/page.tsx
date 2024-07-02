@@ -17,7 +17,7 @@ export default function LeaderboardPage() {
     <>
       <Stack align="center" mb={"3em"} mt={"2em"}>
         <Title>Global Leaderboards</Title>
-        <Group>
+        <Group justify="center">
           <Button
             onClick={() =>
               router.push("/leaderboard?sort=pp&mode=0&pagenumber=1")

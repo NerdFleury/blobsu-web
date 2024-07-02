@@ -5,6 +5,13 @@
   padding-top: calc(var(--mantine-spacing-xl) * 1.5 + rem(20px));
 }
 
+.minicard {
+  position: relative;
+  overflow: visible;
+  padding-left: var(--mantine-spacing-xl);
+  padding-right: var(--mantine-spacing-xl);
+}
+
 .icon {
   position: absolute;
   top: rem(-30px);

@@ -72,7 +72,6 @@ export function HeaderMenu() {
             <Group align="center" gap={5} visibleFrom="sm">
               {items}
             </Group>
-
             <Burger
               opened={opened}
               onClick={toggle}
