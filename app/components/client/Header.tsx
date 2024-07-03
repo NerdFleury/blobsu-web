@@ -3,8 +3,6 @@
 import { Menu, Group, Center, Burger, Container, Avatar } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
-import { IconCircleNumber0 } from "@tabler/icons-react";
-import { IconStar } from "@tabler/icons-react";
 import classes from "../styles/Headers.module.css";
 import Link from "next/link";
 

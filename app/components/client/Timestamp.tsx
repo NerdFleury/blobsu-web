@@ -4,8 +4,6 @@ import { useMantineTheme, Group } from "@mantine/core";
 
 function formatRelativeTime(seconds: number) {
   const d = new Date();
-  console.log("pre seconds", seconds);
-  console.log("current time", d.getTime());
   seconds = d.getTime() / 1000 - seconds;
   const units = [
     { label: "year", seconds: 31536000 },
@@ -19,9 +17,6 @@ function formatRelativeTime(seconds: number) {
   for (let unit of units) {
     if (seconds >= unit.seconds) {
       const value = Math.floor(seconds / unit.seconds);
-      console.log(value);
-      console.log(seconds);
-      console.log(unit.seconds);
       return `Last seen ${value} ${unit.label}${value > 1 ? "s ago" : " ago"}`;
     }
   }

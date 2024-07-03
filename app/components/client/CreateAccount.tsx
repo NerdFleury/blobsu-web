@@ -5,13 +5,9 @@ import classes from "../styles/AuthenticationTitle.module.css";
 import {
   TextInput,
   PasswordInput,
-  Checkbox,
-  Anchor,
   Paper,
   Title,
-  Text,
   Container,
-  Group,
   Button,
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
@@ -23,7 +19,6 @@ interface UserFormData {
   confirmPassword: string;
 }
 
-// Define a type for the error messages
 interface FormErrors {
   username?: string;
   user_email?: string;
@@ -37,8 +32,6 @@ export default function CreateAccount({
 }: {
   handleSubmit: Function;
 }) {
-  const router = useRouter();
-
   const [formData, setFormData] = useState<UserFormData>({
     username: "",
     user_email: "",
@@ -102,7 +95,6 @@ export default function CreateAccount({
       user.append("user[user_email]", email);
       user.append("user[password]", pass);
       user.append("check", "0");
-      console.log(user);
       handleSubmit(user);
     }
   };

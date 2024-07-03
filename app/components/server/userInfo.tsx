@@ -1,9 +1,7 @@
 import {
   ThemeIcon,
-  Progress,
   Text,
   Group,
-  Badge,
   Paper,
   rem,
   Stack,

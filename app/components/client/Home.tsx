@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { SignIn } from "../server/SignInButton";
 import { Button, Title, Stack, Text } from "@mantine/core";
 
 export default function Home({ children }: { children: React.ReactNode }) {
@@ -10,6 +11,7 @@ export default function Home({ children }: { children: React.ReactNode }) {
       <Button component={Link} href="/create">
         Create Account
       </Button>
+      <SignIn />
       {children}
     </Stack>
   );

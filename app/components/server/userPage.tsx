@@ -124,13 +124,7 @@ interface ApiResponseScores {
   player: PlayerScores;
 }
 
-async function fetchUserData({
-  userId,
-  mode,
-}: {
-  userId: string;
-  mode: number;
-}) {
+async function fetchUserData({ userId }: { userId: string }) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_PLAYER_INFO}?scope=all&id=${userId}`,
     {
@@ -138,7 +132,7 @@ async function fetchUserData({
     }
   );
   const data: ApiResponse = await response.json();
-  console.log(data);
+  data;
   return data;
 }
 
@@ -185,7 +179,7 @@ export default function Page({
   useEffect(() => {
     const fetchData = async () => {
       const scoresData = fetchTopPlays({ userId: params.slug, mode: mode });
-      const playerData = fetchUserData({ userId: params.slug, mode: mode });
+      const playerData = fetchUserData({ userId: params.slug });
 
       const [scores, player] = await Promise.all([scoresData, playerData]);
 
@@ -193,9 +187,7 @@ export default function Page({
       setScoreData(necessaryData(scores.scores));
     };
 
-    fetchData().catch((e) => {
-      console.error("an error has occured");
-    });
+    fetchData().catch((e) => {});
   }, [params]);
 
   return (

@@ -1,6 +1,3 @@
-// Import styles of packages that you've installed.
-// All packages except `@mantine/hooks` require styles imports
-
 "use client";
 
 import "@mantine/core/styles.css";
@@ -16,6 +13,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <ColorSchemeScript />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body>
         <MantineProvider defaultColorScheme="dark">

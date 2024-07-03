@@ -82,7 +82,6 @@ export function Plays({ scores }: { scores: score[] }) {
               <Table.Tr key={score.scoreid}>
                 <Table.Td>
                   <Text>{score.mapName}</Text>
-
                   <Text c="dimmed">{score.mapDifficulty}</Text>
                 </Table.Td>
                 <Table.Td>{getMods(score.mods)}</Table.Td>

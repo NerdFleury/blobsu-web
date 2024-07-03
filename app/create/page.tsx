@@ -7,7 +7,6 @@ import {
   Paper,
   TextInput,
   PasswordInput,
-  Notification,
 } from "@mantine/core";
 import { SubmitButton } from "../components/client/SubmitButton";
 import classes from "../components/styles/AuthenticationTitle.module.css";
@@ -20,13 +19,11 @@ const initialState = {
 };
 
 function addNewLines(text: String) {
-  // Split text by period and trim each line
   let lines = text
     .split(".")
     .map((line) => line.trim())
     .filter((line) => line);
 
-  // Remove duplicate lines by converting to Set and back to Array
   lines = lines.filter((line, index) => lines.indexOf(line) === index);
 
   // Add index and new lines

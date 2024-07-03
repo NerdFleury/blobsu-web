@@ -58,13 +58,13 @@ async function fetchGlobal({
         cache: "no-store",
       }
     ).then((res) => {
-      console.log(res);
+      res;
       return res;
     });
     data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    error;
   }
 }
 
@@ -82,7 +82,7 @@ async function getLeaderboard(searchParams: ReadonlyURLSearchParams) {
     }).then((res) => {
       return res;
     });
-    console.log(data);
+    data;
 
     leaderboard = data;
   } else {
@@ -96,7 +96,7 @@ async function getLeaderboard(searchParams: ReadonlyURLSearchParams) {
       });
       leaderboard = data;
     } catch (error) {
-      console.log(error);
+      error;
     }
   }
   return leaderboard;
@@ -114,9 +114,7 @@ export default function Leaderboard({
       setLeaderboard(res!);
     };
 
-    fetchData().catch((e) => {
-      console.error("an error has occured");
-    });
+    fetchData().catch((e) => {});
   }, [searchParams]);
 
   return (

@@ -11,7 +11,7 @@ export default function LeaderboardPage() {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(searchParams);
+    searchParams;
   }, [searchParams]);
   return (
     <>

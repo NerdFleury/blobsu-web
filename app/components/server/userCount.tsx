@@ -13,7 +13,7 @@ async function fetchNumberofUsers() {
     const data = await response.json();
     return data.counts.online;
   } catch (error) {
-    console.log(error);
+    error;
     throw new Error("Failed to fetch user count");
   }
 }
