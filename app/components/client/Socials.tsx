@@ -6,7 +6,10 @@ import Link from "next/link";
 export default function Socials() {
   return (
     <Group mt={120}>
-      <Link style={{ textDecoration: "none" }} href={process.env.DISCORD!}>
+      <Link
+        style={{ textDecoration: "none" }}
+        href="https://discord.gg/jRgudBuKjW"
+      >
         <Stack align="center">
           <Image src={discord} width={61} height={46} alt="discord" />
           <Text fw={700} c="#5664f2">
