@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { headers } from "next/headers";
 
 const nameSchema = z
   .string()
@@ -58,13 +59,29 @@ export async function handleSubmit(prevState: any, user: FormData) {
     };
   }
 
+  const urlSearchParams = new URLSearchParams();
+
+  urlSearchParams.append(
+    "user[username]",
+    user.get("user[username]")!.toString()
+  );
+  urlSearchParams.append(
+    "user[user_email]",
+    user.get("user[user_email]")!.toString()
+  );
+  urlSearchParams.append(
+    "user[password]",
+    user.get("user[password]")!.toString()
+  );
+  urlSearchParams.append("check", "0");
   try {
     await fetch(`${process.env.NEXT_PUBLIC_OSU_API}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
+        "x-forwarded-for": headers().get("x-forwarded-for")!,
       },
-      body: user.toString(),
+      body: urlSearchParams.toString(),
     }).then((res) => {
       if (res.status == 400) {
         throw new Error("Invalid Registration data, User already exists");

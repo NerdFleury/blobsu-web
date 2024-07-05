@@ -17,7 +17,7 @@ import { handleSubmit } from "../lib/createUser";
 import { useFormState } from "react-dom";
 import React, { useEffect } from "react";
 import Link from "next/link";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 const theme = createTheme({
   components: {
@@ -58,6 +58,7 @@ function addNewLines(text: String) {
 
 export default function Page() {
   const [state, formAction] = useFormState(handleSubmit, initialState);
+  const router = useRouter();
 
   useEffect(() => {
     if (state?.message === "Success") {
