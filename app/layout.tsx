@@ -13,6 +13,7 @@ import { Suspense } from "react";
 import { MiniProfile } from "./components/server/HeaderProfile";
 import Background from "./components/client/Background";
 import "./globals.css";
+import Loader from "./loading";
 
 export default function RootLayout({
   children,
@@ -40,7 +41,7 @@ export default function RootLayout({
           <AppShell header={{ height: 56 }}>
             <AppShell.Header>
               <Header>
-                <Suspense>
+                <Suspense fallback={<Loader />}>
                   <MiniProfile />
                 </Suspense>
               </Header>
