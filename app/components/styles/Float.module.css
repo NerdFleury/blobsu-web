@@ -44,8 +44,8 @@
 }
 
 .indicator {
-  margin-top: -2px;
-  margin-left: -1px;
+  margin-bottom: 2px;
+  margin-right: 1px;
   background-color: var(--mantine-primary-color-filled);
   border-radius: var(--mantine-radius-xl);
 }
