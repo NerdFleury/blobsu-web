@@ -1,5 +1,15 @@
-import Page from "@/app/components/server/userPage";
+"use client";
 
-export default function taikoPage({ params }: { params: { slug: string } }) {
-  return <Page params={params} mode={1} />;
+import Page from "@/app/components/server/userPage";
+import { Suspense } from "react";
+import { ModeSwitch } from "@/app/components/client/FloatingUserIndicator";
+
+export default function stdPage({ params }: { params: { slug: string } }) {
+  return (
+    <ModeSwitch params={params}>
+      <Suspense>
+        <Page params={params} mode={1} />
+      </Suspense>
+    </ModeSwitch>
+  );
 }

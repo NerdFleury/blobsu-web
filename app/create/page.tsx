@@ -7,12 +7,33 @@ import {
   Paper,
   TextInput,
   PasswordInput,
+  createTheme,
+  Input,
+  MantineProvider,
 } from "@mantine/core";
 import { SubmitButton } from "../components/client/SubmitButton";
 import classes from "../components/styles/AuthenticationTitle.module.css";
 import { handleSubmit } from "../lib/createUser";
 import { useFormState } from "react-dom";
-import React from "react";
+import React, { useEffect } from "react";
+import Link from "next/link";
+import router from "next/router";
+
+const theme = createTheme({
+  components: {
+    Input: Input.extend({
+      classNames: {
+        input: classes.input,
+      },
+    }),
+
+    InputWrapper: Input.Wrapper.extend({
+      classNames: {
+        label: classes.label,
+      },
+    }),
+  },
+});
 
 const initialState = {
   message: "",
@@ -37,40 +58,61 @@ function addNewLines(text: String) {
 
 export default function Page() {
   const [state, formAction] = useFormState(handleSubmit, initialState);
+
+  useEffect(() => {
+    if (state?.message === "Success") {
+      alert("Account successfully created");
+      router.push("/");
+    }
+  }, [state]);
   return (
     <div>
       <form action={formAction}>
-        <Container size={420} my={40}>
-          <Title ta="center" className={classes.title}>
-            Create an Account
-          </Title>
-          <Text c="red">{addNewLines(state?.message)}</Text>
-          <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-            <TextInput name="name" label="Name" placeholder="Name" required />
-            <TextInput
-              name="email"
-              label="Email"
-              type="email"
-              placeholder="example@gmail.com"
-              required
-            />
-            <PasswordInput
-              name="password"
-              label="Password"
-              placeholder="Your password"
-              required
-              mt="md"
-            />
-            <PasswordInput
-              name="confirmPassword"
-              label="Confirm Password"
-              placeholder="Confirm password"
-              required
-              mt="md"
-            />
-            <SubmitButton />
-          </Paper>
-        </Container>
+        <MantineProvider theme={theme} defaultColorScheme="dark">
+          <Container size={420} my={40}>
+            <Title ta="center" className={classes.title}>
+              Create an Account
+            </Title>
+            <Text c="red">{addNewLines(state?.message)}</Text>
+            <Paper bg="#00292e" shadow="md" p={30} mt={30} radius="md">
+              <TextInput
+                name="user[username]"
+                variant="filled"
+                label="Name"
+                placeholder="Name"
+                required
+              />
+              <TextInput
+                name="user[user_email]"
+                label="Email"
+                variant="filled"
+                type="email"
+                placeholder="example@gmail.com"
+                required
+              />
+              <PasswordInput
+                name="user[password]"
+                variant="filled"
+                label="Password"
+                placeholder="Your password"
+                required
+                mt="md"
+              />
+              <PasswordInput
+                name="confirmPassword"
+                label="Confirm Password"
+                variant="filled"
+                placeholder="Confirm password"
+                required
+                mt="md"
+              />
+              <SubmitButton />
+              <Text mt="sm" size="xs">
+                Have an account? <Link href="/login">Login.</Link>
+              </Text>
+            </Paper>
+          </Container>
+        </MantineProvider>
       </form>
     </div>
   );

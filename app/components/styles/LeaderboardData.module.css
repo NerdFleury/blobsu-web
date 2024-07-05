@@ -1,0 +1,31 @@
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+td {
+  border: solid 1px #000;
+  border-style: none solid solid none;
+  padding: 10px;
+}
+
+tr:first-child td:first-child {
+  border-top-left-radius: 10px;
+}
+tr:first-child td:last-child {
+  border-top-right-radius: 10px;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+tr:first-child td {
+  border-top-style: solid;
+}
+tr td:first-child {
+  border-left-style: solid;
+}

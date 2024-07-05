@@ -9,6 +9,9 @@ import {
   Container,
   Center,
   Button,
+  createTheme,
+  MantineProvider,
+  Input,
 } from "@mantine/core";
 
 import classes from "../components/styles/AuthenticationTitle.module.css";
@@ -16,6 +19,23 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 import { login } from "../lib/loginAction";
+import Link from "next/link";
+
+const theme = createTheme({
+  components: {
+    Input: Input.extend({
+      classNames: {
+        input: classes.input,
+      },
+    }),
+
+    InputWrapper: Input.Wrapper.extend({
+      classNames: {
+        label: classes.label,
+      },
+    }),
+  },
+});
 
 const initialState = {
   message: "",
@@ -40,27 +60,34 @@ export default function AuthenticationTitle() {
         <Text c="red">{state?.message}</Text>
       </Center>
       <form action={formAction}>
-        <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <TextInput
-            label="Email"
-            name="email"
-            type="email"
-            placeholder="you@mantine.dev"
-            required
-          />
-          <PasswordInput
-            label="Password"
-            placeholder="Your password"
-            name="password"
-            type="password"
-            required
-            mt="md"
-          />
+        <MantineProvider theme={theme} defaultColorScheme="dark">
+          <Paper shadow="md" bg="#00292e" p={30} mt={30} radius="md">
+            <TextInput
+              label="Email"
+              name="email"
+              type="email"
+              variant="filled"
+              placeholder="example@gmail.com"
+              required
+            />
+            <PasswordInput
+              label="Password"
+              placeholder="Your password"
+              name="password"
+              type="password"
+              variant="filled"
+              required
+              mt="md"
+            />
 
-          <Button type="submit" fullWidth mt="xl">
-            Sign in
-          </Button>
-        </Paper>
+            <Button type="submit" fullWidth mt="xl">
+              Sign in
+            </Button>
+            <Text mt="sm" size="xs">
+              No account? <Link href="/create">Create one.</Link>
+            </Text>
+          </Paper>
+        </MantineProvider>
       </form>
     </Container>
   );

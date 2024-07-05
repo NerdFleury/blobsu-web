@@ -5,6 +5,7 @@ import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Stack, Title, Group, Button } from "@mantine/core";
 import { useRouter } from "next/navigation";
+import { ModeSwitch } from "../components/client/FloatingIndicator";
 
 export default function LeaderboardPage() {
   const searchParams = useSearchParams();
@@ -17,43 +18,7 @@ export default function LeaderboardPage() {
     <>
       <Stack align="center" mb={"3em"} mt={"2em"}>
         <Title>Global Leaderboards</Title>
-        <Group justify="center">
-          <Button
-            onClick={() =>
-              router.push("/leaderboard?sort=pp&mode=0&pagenumber=1")
-            }
-          >
-            Standard
-          </Button>
-          <Button
-            onClick={() =>
-              router.push("/leaderboard?sort=pp&mode=1&pagenumber=1")
-            }
-          >
-            Taiko
-          </Button>
-          <Button
-            onClick={() =>
-              router.push("/leaderboard?sort=pp&mode=2&pagenumber=1")
-            }
-          >
-            Catch
-          </Button>
-          <Button
-            onClick={() =>
-              router.push("/leaderboard?sort=pp&mode=3&pagenumber=1")
-            }
-          >
-            Mania
-          </Button>
-          <Button
-            onClick={() =>
-              router.push("/leaderboard?sort=pp&mode=4&pagenumber=1")
-            }
-          >
-            Relax
-          </Button>
-        </Group>
+        <ModeSwitch />
       </Stack>
       <Suspense fallback={<Loading />}>
         <Leaderboard searchParams={searchParams} />

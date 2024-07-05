@@ -1,4 +1,14 @@
 .title {
   font-family: Greycliff CF, var(--mantine-font-family);
   font-weight: 900;
+  color: var(--mantine-color-white);
+}
+
+.input {
+  background-color: #02343b;
+  color: var(--mantine-color-white);
+}
+
+.label {
+  color: var(--mantine-color-white);
 }

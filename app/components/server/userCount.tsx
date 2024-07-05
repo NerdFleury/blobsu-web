@@ -1,4 +1,4 @@
-import { Text } from "@mantine/core";
+import { Text, Group } from "@mantine/core";
 
 async function fetchNumberofUsers() {
   try {
@@ -11,7 +11,7 @@ async function fetchNumberofUsers() {
       return res;
     });
     const data = await response.json();
-    return data.counts.online;
+    return data.counts;
   } catch (error) {
     error;
     throw new Error("Failed to fetch user count");
@@ -20,9 +20,23 @@ async function fetchNumberofUsers() {
 
 export default async function UserCount() {
   const data = await fetchNumberofUsers();
+  const weight = 500;
+  const size = "30";
   return (
-    <>
-      <Text>Number of users online: {data} </Text>
-    </>
+    <Group gap="xs" mt="xl" bg="black" style={{ borderRadius: 10 }} px={12}>
+      <Text size="xl" c="blue" fw={weight}>
+        {data.total}
+      </Text>
+      <Text size="xl" fw={weight}>
+        Total Users
+      </Text>
+      &nbsp;&nbsp;
+      <Text size="xl" c="#ff001e" fw={weight}>
+        {data.online}
+      </Text>
+      <Text size="xl" fw={weight}>
+        Online
+      </Text>
+    </Group>
   );
 }

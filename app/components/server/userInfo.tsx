@@ -35,7 +35,7 @@ export function StatsCard({
     <Stack>
       <Paper
         radius="md"
-        bg={theme.colors.dark[6]}
+        bg="#00292e"
         shadow="md"
         miw={400}
         className={classes.card}

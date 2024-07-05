@@ -1,84 +1,44 @@
-"use client";
-
-import { Menu, Group, Center, Burger, Container, Avatar } from "@mantine/core";
+import { useEffect, useState } from "react";
+import { Container, Group, Burger } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconChevronDown } from "@tabler/icons-react";
-import classes from "../styles/Headers.module.css";
+import BlobsuLogo from "@/public/headerlogo.png";
+import classes from "@/app/components/styles/Headers.module.css";
+import Image from "next/image";
 import Link from "next/link";
 
 const links = [
   { link: "/", label: "Home" },
-  { link: "/leaderboard?sort=pp&mode=0&pagenumber=1", label: "Leaderboard" },
-  {
-    link: "#1",
-    label: "Connect",
-    links: [
-      { link: "/howto", label: "How To Connect" },
-      { link: "/faq", label: "FAQ" },
-      { link: "/discord", label: "Discord Community" },
-    ],
-  },
-  { link: "/settings", label: "Settings" },
-  { link: "/filler", label: "More To Come" },
+  { link: "/leaderboard", label: "Leaderboard" },
+  { link: "/", label: "Top Plays" },
+  { link: "/", label: "Rules" },
 ];
 
-export function HeaderMenu() {
+export default function Header({ children }: { children: React.ReactNode }) {
   const [opened, { toggle }] = useDisclosure(false);
 
-  const items = links.map((link) => {
-    const menuItems = link.links?.map((item) => (
-      <Menu.Item key={item.link}>{item.label}</Menu.Item>
-    ));
+  const [icon, setIcon] = useState<any | null>();
 
-    if (menuItems) {
-      return (
-        <Menu
-          key={link.label}
-          trigger="hover"
-          transitionProps={{ exitDuration: 0 }}
-          withinPortal
-        >
-          <Menu.Target>
-            <Link
-              href={link.link}
-              className={classes.link}
-              onClick={(event) => event.preventDefault()}
-            >
-              <Center>
-                <span className={classes.linkLabel}>{link.label}</span>
-                <IconChevronDown size="0.9rem" stroke={1.5} />
-              </Center>
-            </Link>
-          </Menu.Target>
-          <Menu.Dropdown>{menuItems}</Menu.Dropdown>
-        </Menu>
-      );
-    }
+  useEffect(() => {
+    setIcon(children);
+  }, [children]);
 
-    return (
-      <Link key={link.label} href={link.link} className={classes.link}>
-        {link.label}
-      </Link>
-    );
-  });
+  const items = links.map((link) => (
+    <Link key={link.label} href={link.link} className={classes.link}>
+      {link.label}
+    </Link>
+  ));
 
   return (
     <header className={classes.header}>
-      <Center>
-        <Container size="100%">
-          <div className={classes.inner}>
-            <Group align="center" gap={5} visibleFrom="sm">
-              {items}
-            </Group>
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              size="sm"
-              hiddenFrom="sm"
-            />
-          </div>
-        </Container>
-      </Center>
+      <Container className={classes.inner}>
+        <Image src={BlobsuLogo} width={60} height={60} alt="logo" />
+        <Group align="center" gap={5} visibleFrom="xs">
+          {items}
+        </Group>
+        {icon}
+
+        <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+      </Container>
     </header>
   );
 }

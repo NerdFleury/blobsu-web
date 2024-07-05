@@ -3,6 +3,22 @@
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
+const nameSchema = z
+  .string()
+  .min(3, "Name must be at least 3 characters long")
+  .max(15, "Name cannot be more than 15 characters long")
+  .refine(
+    (value) => {
+      const hasUnderscore = value.includes("_");
+      const hasSpace = value.includes(" ");
+
+      return !(hasUnderscore && hasSpace); // Ensure both are not present
+    },
+    {
+      message: "Name can contain either a `_` or a ` `, but not both",
+    }
+  );
+
 const passwordSchema = z
   .string()
   .min(8, "Password must be at least 8 characters long")
@@ -14,7 +30,7 @@ const passwordSchema = z
 
 const schema = z
   .object({
-    name: z.string().min(1, "Name is required"),
+    name: nameSchema,
     email: z.string().email("Invalid email address"),
     password: passwordSchema,
     confirmPassword: passwordSchema,
@@ -26,9 +42,9 @@ const schema = z
 
 export async function handleSubmit(prevState: any, user: FormData) {
   const validatedFields = schema.safeParse({
-    name: user.get("name"),
-    email: user.get("email"),
-    password: user.get("password"),
+    name: user.get("user[username]"),
+    email: user.get("user[user_email]"),
+    password: user.get("user[password]"),
     confirmPassword: user.get("confirmPassword"),
   });
 
@@ -37,17 +53,10 @@ export async function handleSubmit(prevState: any, user: FormData) {
     for (let x = 0; x < JSON.parse(validatedFields.error.message).length; x++) {
       error += JSON.parse(validatedFields.error.message)[x].message + ".";
     }
-    console.log(error);
     return {
       message: error,
     };
   }
-
-  const userdata = new URLSearchParams();
-  userdata.append("user[username]", user.get("name")!.toString());
-  userdata.append("user[user_email]", user.get("email")!.toString());
-  userdata.append("user[password]", user.get("password")!.toString());
-  userdata.append("check", "0");
 
   try {
     await fetch(`${process.env.NEXT_PUBLIC_OSU_API}/users`, {
@@ -55,7 +64,7 @@ export async function handleSubmit(prevState: any, user: FormData) {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: userdata.toString(),
+      body: user.toString(),
     }).then((res) => {
       if (res.status == 400) {
         throw new Error("Invalid Registration data, User already exists");
@@ -67,5 +76,7 @@ export async function handleSubmit(prevState: any, user: FormData) {
     };
   }
 
-  redirect("/");
+  return {
+    message: "Success",
+  };
 }

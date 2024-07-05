@@ -193,7 +193,7 @@ export default function Page({
   return (
     <>
       <Suspense fallback={<LoadingDef />}>
-        <Stack align="center">
+        <Stack mt="xl" align="center">
           {userData ? (
             <StatsCard
               name={userData!.info.name}
@@ -210,23 +210,7 @@ export default function Page({
           )}
         </Stack>
       </Suspense>
-      <Group mt="xl" justify="center">
-        <Button onClick={() => router.push(`/user/${params.slug}`)}>
-          Standard
-        </Button>
-        <Button onClick={() => router.push(`/user/${params.slug}/taiko`)}>
-          Taiko
-        </Button>
-        <Button onClick={() => router.push(`/user/${params.slug}/catch`)}>
-          Catch
-        </Button>
-        <Button onClick={() => router.push(`/user/${params.slug}/mania`)}>
-          Mania
-        </Button>
-        <Button onClick={() => router.push(`/user/${params.slug}/relax`)}>
-          Relax
-        </Button>
-      </Group>
+      <Group mt="xl" justify="center"></Group>
       <Suspense fallback={<LoadingDef />}>
         <Center>
           {scoreData ? <Plays scores={scoreData} /> : <LoadingDef />}

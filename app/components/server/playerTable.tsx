@@ -1,6 +1,6 @@
 "use client";
 
-import { Center, Stack, Table, Text } from "@mantine/core";
+import { Center, Stack, Table, Text, Title } from "@mantine/core";
 
 interface score {
   scoreid: number;
@@ -61,23 +61,27 @@ function getMods(bitmask: number): string[] {
 export function Plays({ scores }: { scores: score[] }) {
   return (
     <>
-      <Stack mt={50} w={"70%"}>
+      <Stack mt={50} w={"80%"}>
         <Center>
-          <Text maw={"70%"} fw={700}>
-            Top Plays
-          </Text>
+          <Title order={2}>Top Plays</Title>
         </Center>
 
-        <Table align="center" maw={"70%"} withRowBorders={false} striped>
+        <Table
+          align="center"
+          maw={"70%"}
+          withRowBorders={false}
+          striped
+          stripedColor="#052c30"
+        >
           <Table.Thead>
             <Table.Tr>
               <Table.Th>Map</Table.Th>
               <Table.Th>Mods</Table.Th>
               <Table.Th>Accuracy</Table.Th>
-              <Table.Th>pp</Table.Th>
+              <Table.Th>Performance</Table.Th>
             </Table.Tr>
           </Table.Thead>
-          <Table.Tbody>
+          <Table.Tbody style={{ backgroundColor: "#022226" }}>
             {scores.map((score: score) => (
               <Table.Tr key={score.scoreid}>
                 <Table.Td>
@@ -86,7 +90,7 @@ export function Plays({ scores }: { scores: score[] }) {
                 </Table.Td>
                 <Table.Td>{getMods(score.mods)}</Table.Td>
                 <Table.Td>{score.accuracy.toFixed(2)}%</Table.Td>
-                <Table.Td>{score.pp}</Table.Td>
+                <Table.Td>{score.pp.toFixed(2)}pp</Table.Td>
               </Table.Tr>
             ))}
           </Table.Tbody>

@@ -10,6 +10,7 @@ import {
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface leaderboard {
   player_id: number;
@@ -119,7 +120,14 @@ export default function Leaderboard({
 
   return (
     <div>
-      <Table align="center" maw={"60%"} highlightOnHover withRowBorders={false}>
+      <Table
+        align="center"
+        maw={"60%"}
+        striped
+        stripedColor="#053f47"
+        highlightOnHover
+        withRowBorders={false}
+      >
         <TableThead>
           <TableTr>
             <TableTh>Rank</TableTh>
@@ -130,27 +138,37 @@ export default function Leaderboard({
             <TableTh>PP</TableTh>
           </TableTr>
         </TableThead>
-        <TableTbody>
+        <TableTbody style={{ backgroundColor: "#042b30" }}>
           {leaderboard
             ? leaderboard.leaderboard.map((player, index) => (
-                <TableTr style={{ borderRadius: 20 }} key={player.name}>
-                  <TableTd>#{offset + index + 1}</TableTd>
-                  <TableTd>{player.country}</TableTd>
+                <>
+                  <TableTr key={player.name}>
+                    <TableTd fw={500}>#{offset + index + 1}</TableTd>
+                    <TableTd>
+                      <Image
+                        src={`https://flagcdn.com/w40/${player.country}.png`}
+                        width={24}
+                        height={16}
+                        alt={player.country}
+                      />
+                    </TableTd>
 
-                  <TableTd>
-                    {" "}
-                    <UnstyledButton
-                      component={Link}
-                      href={`/user/${player.player_id}`}
-                    >
-                      {player.name}
-                    </UnstyledButton>
-                  </TableTd>
+                    <TableTd>
+                      {" "}
+                      <UnstyledButton
+                        component={Link}
+                        href={`/user/${player.player_id}`}
+                        fw={500}
+                      >
+                        {player.name}
+                      </UnstyledButton>
+                    </TableTd>
 
-                  <TableTd>{player.plays}</TableTd>
-                  <TableTd>{player.acc.toFixed(2)}%</TableTd>
-                  <TableTd>{player.pp}</TableTd>
-                </TableTr>
+                    <TableTd fw={500}>{player.plays}</TableTd>
+                    <TableTd fw={500}>{player.acc.toFixed(2)}%</TableTd>
+                    <TableTd fw={500}>{player.pp}</TableTd>
+                  </TableTr>
+                </>
               ))
             : null}
         </TableTbody>

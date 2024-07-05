@@ -1,5 +1,10 @@
 import { Loader } from "@mantine/core";
+import { Center } from "@mantine/core";
 
 export function LoadingDef() {
-  return <Loader mt="xl" size="xl" type="bars" />;
+  return (
+    <Center>
+      <Loader mt="xl" size="xl" type="bars" />
+    </Center>
+  );
 }
