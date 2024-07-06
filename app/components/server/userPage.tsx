@@ -188,7 +188,7 @@ export default function Page({
     };
 
     fetchData().catch((e) => {});
-  }, [params]);
+  }, [params, mode]);
 
   return (
     <>

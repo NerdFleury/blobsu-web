@@ -44,18 +44,12 @@ export default function RootLayout({
         >
           <AppShell header={{ height: 56 }}>
             <AppShell.Header withBorder={false}>
-              <Header
-                children={
-                  <Suspense fallback={<Loader />}>
-                    <MiniProfile />
-                  </Suspense>
-                }
-                mobileChild={
-                  <Suspense fallback={<Text>...</Text>}>
-                    <MobileProfile />
-                  </Suspense>
-                }
-              />
+              <Header>
+                <Suspense fallback={<Loader />}>
+                  <MiniProfile />
+                  <MobileProfile />
+                </Suspense>
+              </Header>
             </AppShell.Header>
             <Background />
             <AppShell.Main>{children}</AppShell.Main>

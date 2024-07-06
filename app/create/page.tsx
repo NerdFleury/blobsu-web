@@ -65,7 +65,7 @@ export default function Page() {
       alert("Account successfully created");
       router.push("/");
     }
-  }, [state]);
+  }, [state, router]);
   return (
     <div>
       <form action={formAction}>

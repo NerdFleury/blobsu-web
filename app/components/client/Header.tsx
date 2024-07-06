@@ -15,22 +15,16 @@ const links = [
   { link: "/", label: "Rules" },
 ];
 
-export function Header({
-  children,
-  mobileChild,
-}: {
-  children: React.ReactNode;
-  mobileChild: React.ReactNode;
-}) {
+export function Header({ children }: { children: any }) {
   const [opened, { toggle }] = useDisclosure(false);
 
   const [icon, setIcon] = useState<any | null>();
   const [mobileLog, setMobileLog] = useState<any | null>();
 
   useEffect(() => {
-    setIcon(children);
-    setMobileLog(mobileChild);
-  }, [children, mobileChild]);
+    setIcon(children!.MiniProfile);
+    setMobileLog(children.MobileProfile);
+  }, [children]);
 
   const items = links.map((link) => (
     <Link key={link.label} href={link.link} className={classes.link}>
@@ -71,7 +65,7 @@ export function Header({
             <Menu.Item onClick={toggle} component={Link} href="/">
               Rules
             </Menu.Item>
-            {mobileChild}
+            {mobileLog}
           </Menu.Dropdown>
         </Menu>
       </Container>

@@ -11,14 +11,14 @@ export function MobileProfile() {
   return (
     <>
       {session?.user ? (
-        <MenuItem>Logged In (under construction)</MenuItem>
+        <MenuItem hiddenFrom="xs">Logged In (under construction)</MenuItem>
       ) : (
         <>
-          <MenuDivider />
-          <MenuItem component={Link} href="/login">
+          <MenuDivider hiddenFrom="xs" />
+          <MenuItem hiddenFrom="xs" component={Link} href="/login">
             Log in
           </MenuItem>
-          <MenuItem component={Link} href="/create">
+          <MenuItem hiddenFrom="xs" component={Link} href="/create">
             Sign Up
           </MenuItem>
         </>
