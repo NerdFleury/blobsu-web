@@ -22,8 +22,8 @@ export function Header({ children }: { children: any }) {
   const [mobileLog, setMobileLog] = useState<any | null>();
 
   useEffect(() => {
-    setIcon(children!.MiniProfile);
-    setMobileLog(children.MobileProfile);
+    setIcon(children.props.children[0]);
+    setMobileLog(children.props.children[1]);
   }, [children]);
 
   const items = links.map((link) => (
