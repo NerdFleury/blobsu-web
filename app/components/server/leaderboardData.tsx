@@ -1,9 +1,11 @@
 import {
   Table,
+  TableScrollContainer,
   TableTbody,
   TableTd,
   TableTh,
   TableThead,
+  Text,
   TableTr,
   UnstyledButton,
 } from "@mantine/core";
@@ -119,29 +121,29 @@ export default function Leaderboard({
   }, [searchParams]);
 
   return (
-    <div>
-      <Table
-        align="center"
-        maw={"60%"}
-        striped
-        stripedColor="#053f47"
-        highlightOnHover
-        withRowBorders={false}
-      >
-        <TableThead>
-          <TableTr>
-            <TableTh>Rank</TableTh>
-            <TableTh>Country</TableTh>
-            <TableTh>Player</TableTh>
-            <TableTh>Play Count</TableTh>
-            <TableTh>Accuracy</TableTh>
-            <TableTh>PP</TableTh>
-          </TableTr>
-        </TableThead>
-        <TableTbody style={{ backgroundColor: "#042b30" }}>
-          {leaderboard
-            ? leaderboard.leaderboard.map((player, index) => (
-                <>
+    <div style={{ paddingLeft: 10 }}>
+      <TableScrollContainer minWidth={510} type="native">
+        <Table
+          align="center"
+          maw={"60%"}
+          striped
+          stripedColor="#053f47"
+          highlightOnHover
+          withRowBorders={false}
+        >
+          <TableThead>
+            <TableTr>
+              <TableTh>Rank</TableTh>
+              <TableTh>Country</TableTh>
+              <TableTh>Player</TableTh>
+              <TableTh>Play Count</TableTh>
+              <TableTh>Accuracy</TableTh>
+              <TableTh>PP</TableTh>
+            </TableTr>
+          </TableThead>
+          <TableTbody style={{ backgroundColor: "#042b30" }}>
+            {leaderboard
+              ? leaderboard.leaderboard.map((player, index) => (
                   <TableTr key={player.name}>
                     <TableTd fw={500}>#{offset + index + 1}</TableTd>
                     <TableTd>
@@ -168,11 +170,12 @@ export default function Leaderboard({
                     <TableTd fw={500}>{player.acc.toFixed(2)}%</TableTd>
                     <TableTd fw={500}>{player.pp}</TableTd>
                   </TableTr>
-                </>
-              ))
-            : null}
-        </TableTbody>
-      </Table>
+                ))
+              : null}
+          </TableTbody>
+        </Table>
+      </TableScrollContainer>
+      <Text mt="xl"></Text>
     </div>
   );
 }

@@ -1,0 +1,21 @@
+.footer {
+  background-color: rgb(0, 71, 71);
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--mantine-spacing-xl);
+  padding-bottom: var(--mantine-spacing-xl);
+
+  @media (max-width: var(--mantine-breakpoint-xs)) {
+    flex-direction: column;
+  }
+}
+
+.links {
+  @media (max-width: var(--mantine-breakpoint-md)) {
+    margin-top: var(--mantine-spacing-md);
+  }
+}

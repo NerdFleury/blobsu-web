@@ -62,15 +62,15 @@ export default function TimeStamp({
         radius="md"
         bg="#00292e"
         shadow="md"
-        miw={400}
-        className={classes.minicard}
+        w="100%"
+        className={classes.lastseencard}
       >
         <Group justify="center">
-          <Text size="sm" c="dimmed">
+          <Text size="xs" c="dimmed">
             {formatRelativeTime(latest_activity)}
           </Text>
-          <Text size="sm" c="dimmed">
-            Date registered {formatToMonthsAndYears(creation_time)}
+          <Text size="xs" c="dimmed">
+            Registered {formatToMonthsAndYears(creation_time)}
           </Text>
         </Group>
       </Paper>

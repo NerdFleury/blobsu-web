@@ -11,10 +11,14 @@ import Socials from "./Socials";
 export default function Home({ children }: { children: React.ReactNode }) {
   return (
     <Stack mt="10em" align="center">
-      <Image src={HeroLogo} width={800} height={255} alt="blobsu text logo" />
-      <Text fw={600} c="white" size="45px">
+      <Image
+        src={HeroLogo}
+        style={{ maxWidth: 800, width: "90%", maxHeight: 255, height: "30%" }}
+        alt="blobsu text logo"
+      />
+      <Title order={1} c="white">
         Welcome to Blobsu
-      </Text>
+      </Title>
       <Button
         variant="filled"
         color="black"
@@ -27,7 +31,6 @@ export default function Home({ children }: { children: React.ReactNode }) {
         How To Connect
       </Button>
       {children}
-      <Socials />
     </Stack>
   );
 }

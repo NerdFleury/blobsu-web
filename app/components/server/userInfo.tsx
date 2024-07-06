@@ -10,6 +10,10 @@ import {
 import { IconUserCircle } from "@tabler/icons-react";
 import classes from "../styles/StatsCard.module.css";
 import TimeStamp from "../client/Timestamp";
+import Image from "next/image";
+import defaultImg from "@/public/default.png";
+
+// this will be dealt with fully once user profile ability is completed
 
 export function StatsCard({
   name,
@@ -32,19 +36,23 @@ export function StatsCard({
 }) {
   const theme = useMantineTheme();
   return (
-    <Stack>
+    <Stack align="center">
       <Paper
         radius="md"
         bg="#00292e"
         shadow="md"
-        miw={400}
+        w="90%"
+        maw={360}
         className={classes.card}
         mt={20}
       >
         <ThemeIcon className={classes.icon} size={90} radius={90}>
-          <IconUserCircle
-            style={{ width: rem(32), height: rem(32) }}
-            stroke={1.5}
+          <Image
+            src={defaultImg}
+            width="90"
+            height="90"
+            alt="default pfp"
+            style={{ borderRadius: 90 }}
           />
         </ThemeIcon>
 

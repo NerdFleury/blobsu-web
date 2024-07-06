@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { Container, Group, Burger } from "@mantine/core";
+import { Container, Group, Burger, Menu } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import BlobsuLogo from "@/public/headerlogo.png";
 import classes from "@/app/components/styles/Headers.module.css";
@@ -13,14 +15,22 @@ const links = [
   { link: "/", label: "Rules" },
 ];
 
-export default function Header({ children }: { children: React.ReactNode }) {
+export function Header({
+  children,
+  mobileChild,
+}: {
+  children: React.ReactNode;
+  mobileChild: React.ReactNode;
+}) {
   const [opened, { toggle }] = useDisclosure(false);
 
   const [icon, setIcon] = useState<any | null>();
+  const [mobileLog, setMobileLog] = useState<any | null>();
 
   useEffect(() => {
     setIcon(children);
-  }, [children]);
+    setMobileLog(mobileChild);
+  }, [children, mobileChild]);
 
   const items = links.map((link) => (
     <Link key={link.label} href={link.link} className={classes.link}>
@@ -31,13 +41,39 @@ export default function Header({ children }: { children: React.ReactNode }) {
   return (
     <header className={classes.header}>
       <Container className={classes.inner}>
-        <Image src={BlobsuLogo} width={60} height={60} alt="logo" />
+        <Container p={0} m={0} visibleFrom="xs">
+          <Image src={BlobsuLogo} width={60} height={60} alt="logo" />
+        </Container>
         <Group align="center" gap={5} visibleFrom="xs">
           {items}
         </Group>
         {icon}
+        <Menu width="97vw">
+          <Menu.Target>
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom="xs"
+              size="sm"
+            />
+          </Menu.Target>
 
-        <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+          <Menu.Dropdown mt="md">
+            <Menu.Item onClick={toggle} component={Link} href="/">
+              Home
+            </Menu.Item>
+            <Menu.Item onClick={toggle} component={Link} href="/leaderboard">
+              Leaderboard
+            </Menu.Item>
+            <Menu.Item onClick={toggle} component={Link} href="/">
+              Top Plays
+            </Menu.Item>
+            <Menu.Item onClick={toggle} component={Link} href="/">
+              Rules
+            </Menu.Item>
+            {mobileChild}
+          </Menu.Dropdown>
+        </Menu>
       </Container>
     </header>
   );

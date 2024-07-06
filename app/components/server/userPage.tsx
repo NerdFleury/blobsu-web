@@ -216,6 +216,7 @@ export default function Page({
           {scoreData ? <Plays scores={scoreData} /> : <LoadingDef />}
         </Center>
       </Suspense>
+      <Text mt="xl"></Text>
     </>
   );
 }

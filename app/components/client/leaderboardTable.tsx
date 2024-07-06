@@ -1,6 +1,6 @@
 "use client";
 
-import { Title } from "@mantine/core";
+import { Center, Title } from "@mantine/core";
 
 export default function LeaderboardTable({
   children,

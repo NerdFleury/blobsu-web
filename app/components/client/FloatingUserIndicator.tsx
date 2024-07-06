@@ -75,7 +75,13 @@ export function ModeSwitch({
       mod={{ active: active === index }}
     >
       <span className={classes.controlLabel}>
-        <Image width={20} height={20} src={item.mode} alt={item.name} />
+        <Image
+          width={20}
+          height={20}
+          src={item.mode}
+          alt={item.name}
+          priority
+        />
       </span>
     </UnstyledButton>
   ));

@@ -1,6 +1,13 @@
 "use client";
 
-import { Center, Stack, Table, Text, Title } from "@mantine/core";
+import {
+  Center,
+  Stack,
+  Table,
+  TableScrollContainer,
+  Text,
+  Title,
+} from "@mantine/core";
 
 interface score {
   scoreid: number;
@@ -61,40 +68,42 @@ function getMods(bitmask: number): string[] {
 export function Plays({ scores }: { scores: score[] }) {
   return (
     <>
-      <Stack mt={50} w={"80%"}>
+      <Stack mt={50} w="100%">
         <Center>
           <Title order={2}>Top Plays</Title>
         </Center>
-
-        <Table
-          align="center"
-          maw={"70%"}
-          withRowBorders={false}
-          striped
-          stripedColor="#052c30"
-        >
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th>Map</Table.Th>
-              <Table.Th>Mods</Table.Th>
-              <Table.Th>Accuracy</Table.Th>
-              <Table.Th>Performance</Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody style={{ backgroundColor: "#022226" }}>
-            {scores.map((score: score) => (
-              <Table.Tr key={score.scoreid}>
-                <Table.Td>
-                  <Text>{score.mapName}</Text>
-                  <Text c="dimmed">{score.mapDifficulty}</Text>
-                </Table.Td>
-                <Table.Td>{getMods(score.mods)}</Table.Td>
-                <Table.Td>{score.accuracy.toFixed(2)}%</Table.Td>
-                <Table.Td>{score.pp.toFixed(2)}pp</Table.Td>
+        <Table.ScrollContainer minWidth={476} type="native">
+          <Table
+            align="center"
+            maw={900}
+            w="90%"
+            withRowBorders={false}
+            striped
+            stripedColor="#052c30"
+          >
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>Map</Table.Th>
+                <Table.Th>Mods</Table.Th>
+                <Table.Th>Accuracy</Table.Th>
+                <Table.Th>Performance</Table.Th>
               </Table.Tr>
-            ))}
-          </Table.Tbody>
-        </Table>
+            </Table.Thead>
+            <Table.Tbody style={{ backgroundColor: "#022226" }}>
+              {scores.map((score: score) => (
+                <Table.Tr key={score.scoreid}>
+                  <Table.Td>
+                    <Text>{score.mapName}</Text>
+                    <Text c="dimmed">{score.mapDifficulty}</Text>
+                  </Table.Td>
+                  <Table.Td>{getMods(score.mods)}</Table.Td>
+                  <Table.Td>{score.accuracy.toFixed(2)}%</Table.Td>
+                  <Table.Td>{score.pp.toFixed(2)}pp</Table.Td>
+                </Table.Tr>
+              ))}
+            </Table.Tbody>
+          </Table>
+        </Table.ScrollContainer>
       </Stack>
     </>
   );

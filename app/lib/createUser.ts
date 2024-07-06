@@ -81,7 +81,7 @@ export async function handleSubmit(prevState: any, user: FormData) {
         "Content-Type": "application/x-www-form-urlencoded",
         "x-forwarded-for": headers().get("x-forwarded-for")!,
       },
-      body: urlSearchParams.toString(),
+      body: user,
     }).then((res) => {
       if (res.status == 400) {
         throw new Error("Invalid Registration data, User already exists");

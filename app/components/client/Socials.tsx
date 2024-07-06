@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Socials() {
   return (
-    <Group mt={120}>
+    <Group mt="15em">
       <Link
         style={{ textDecoration: "none" }}
         href="https://discord.gg/jRgudBuKjW"
