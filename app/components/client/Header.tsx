@@ -23,7 +23,6 @@ export function Header({ children }: { children: ReactElement }) {
 
   useEffect(() => {
     setIcon(children.props.children[0]);
-    console.log(children);
     setMobileLog(children.props.children[1]);
   }, [children]);
 
