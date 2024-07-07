@@ -1,8 +1,4 @@
-"use server";
-
-import { redirect } from "next/navigation";
 import { z } from "zod";
-import { headers } from "next/headers";
 
 const nameSchema = z
   .string()
