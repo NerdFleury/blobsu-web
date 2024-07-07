@@ -3,7 +3,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import { Container, Group, Burger, Menu, UnstyledButton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import BlobsuLogo from "@/public/logo.png";
+import BlobsuLogo from "@/public/Logo.png";
 import classes from "@/app/components/styles/Headers.module.css";
 import Image from "next/image";
 import Link from "next/link";
