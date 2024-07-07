@@ -4,8 +4,7 @@
     var(--mantine-color-gray-0),
     var(--mantine-color-dark-8)
   );
-  width: fit-content;
-  height: fit-content;
+
   border-radius: var(--mantine-radius-xl);
   padding: 10px;
   border: 1px solid
@@ -14,13 +13,13 @@
 
 .control {
   padding: 5px 12px;
-  line-height: 1;
+  line-height: 0;
   color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-2));
   border-radius: var(--mantine-radius-xl);
   font-size: var(--mantine-font-size-xl);
   transition: color 100ms ease;
   align-items: center;
-  vertical-align: middle;
+  vertical-align: baseline;
   justify-content: center;
   font-weight: 500;
 
@@ -44,8 +43,6 @@
 }
 
 .indicator {
-  margin-bottom: 2px;
-  margin-right: 1px;
   background-color: var(--mantine-primary-color-filled);
   border-radius: var(--mantine-radius-xl);
 }

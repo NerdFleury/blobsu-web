@@ -46,7 +46,7 @@ export async function handleSubmit(prevState: any, user: FormData) {
     name: user.get("user[username]"),
     email: user.get("user[user_email]"),
     password: user.get("user[password]"),
-    confirmPassword: user.get("confirmPassword"),
+    confirmPassword: user.get("user[confirmPassword]"),
   });
 
   if (!validatedFields.success) {
@@ -58,36 +58,20 @@ export async function handleSubmit(prevState: any, user: FormData) {
       message: error,
     };
   }
-
-  const urlSearchParams = new URLSearchParams();
-
-  urlSearchParams.append(
-    "user[username]",
-    user.get("user[username]")!.toString()
-  );
-  urlSearchParams.append(
-    "user[user_email]",
-    user.get("user[user_email]")!.toString()
-  );
-  urlSearchParams.append(
-    "user[password]",
-    user.get("user[password]")!.toString()
-  );
-  urlSearchParams.append("check", "0");
   try {
     await fetch(`${process.env.NEXT_PUBLIC_OSU_API}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-forwarded-for": headers().get("x-forwarded-for")!,
       },
-      body: user,
+      body: user.get("searchParams"),
     }).then((res) => {
       if (res.status == 400) {
         throw new Error("Invalid Registration data, User already exists");
       }
     });
   } catch (error) {
+    console.log(error);
     return {
       message: "User or Email already exists",
     };

@@ -15,7 +15,7 @@ import { SubmitButton } from "../components/client/SubmitButton";
 import classes from "../components/styles/AuthenticationTitle.module.css";
 import { handleSubmit } from "../lib/createUser";
 import { useFormState } from "react-dom";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -56,7 +56,39 @@ function addNewLines(text: String) {
   ));
 }
 
+function convertToUrl({
+  name,
+  email,
+  password,
+  confirmPassword,
+}: {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}) {
+  let data = new URLSearchParams();
+  data.append("user[username]", name);
+  data.append("user[user_email]", email);
+  data.append("user[password]", password);
+  data.append("user[confirmPassword]", confirmPassword);
+  data.append("check", "0");
+
+  let form = new FormData();
+  form.append("searchParams", data.toString());
+  form.append("user[username]", name);
+  form.append("user[user_email]", email);
+  form.append("user[password]", password);
+  form.append("user[confirmPassword]", confirmPassword);
+
+  return form;
+}
+
 export default function Page() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [state, formAction] = useFormState(handleSubmit, initialState);
   const router = useRouter();
 
@@ -68,7 +100,18 @@ export default function Page() {
   }, [state, router]);
   return (
     <div>
-      <form action={formAction}>
+      <form
+        action={() =>
+          formAction(
+            convertToUrl({
+              name: name,
+              email: email,
+              confirmPassword: confirmPassword,
+              password: password,
+            })
+          )
+        }
+      >
         <MantineProvider theme={theme} defaultColorScheme="dark">
           <Container size={420} my={40}>
             <Title ta="center" className={classes.title}>
@@ -79,6 +122,8 @@ export default function Page() {
               <TextInput
                 name="user[username]"
                 variant="filled"
+                value={name}
+                onChange={(e) => setName(e.currentTarget.value)}
                 label="Name"
                 placeholder="Name"
                 required
@@ -86,6 +131,8 @@ export default function Page() {
               <TextInput
                 name="user[user_email]"
                 label="Email"
+                value={email}
+                onChange={(e) => setEmail(e.currentTarget.value)}
                 variant="filled"
                 type="email"
                 placeholder="example@gmail.com"
@@ -94,6 +141,8 @@ export default function Page() {
               <PasswordInput
                 name="user[password]"
                 variant="filled"
+                value={password}
+                onChange={(e) => setPassword(e.currentTarget.value)}
                 label="Password"
                 placeholder="Your password"
                 required
@@ -102,6 +151,8 @@ export default function Page() {
               <PasswordInput
                 name="confirmPassword"
                 label="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.currentTarget.value)}
                 variant="filled"
                 placeholder="Confirm password"
                 required
