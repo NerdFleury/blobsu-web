@@ -1,14 +1,10 @@
 .root {
   position: relative;
-  background-color: light-dark(
-    var(--mantine-color-gray-0),
-    var(--mantine-color-dark-8)
-  );
+  background-color: rgb(16, 16, 16);
 
   border-radius: var(--mantine-radius-xl);
   padding: 10px;
-  border: 1px solid
-    light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+  border: 0px;
 }
 
 .control {
@@ -44,5 +40,5 @@
 
 .indicator {
   background-color: var(--mantine-primary-color-filled);
-  border-radius: var(--mantine-radius-xl);
+  border-radius: 99px;
 }

@@ -15,7 +15,7 @@ import github from "@/public/github-mark-white.png";
 
 export default function Footer() {
   return (
-    <Center bd={0} bg="#0d1c1f" py={25}>
+    <Center bd={0} className={classes.footer} py={25}>
       <Group gap={30} align="center" className={classes.links}>
         <Link
           style={{ textDecoration: "none" }}

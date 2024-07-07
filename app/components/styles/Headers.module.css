@@ -28,3 +28,10 @@
     border-bottom-color: var(--mantine-color-white);
   }
 }
+
+.menu {
+  background-color: #000000;
+  border: 0;
+  color: white;
+  margin-top: 20px;
+}

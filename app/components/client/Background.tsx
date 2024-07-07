@@ -14,7 +14,7 @@ export default function Background() {
           objectFit: "cover",
         }}
         fill
-        sizes="100vw"
+        sizes="200vh"
       />
     </div>
   );

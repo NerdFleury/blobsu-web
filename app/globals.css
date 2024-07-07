@@ -5,4 +5,9 @@ body {
   background-image: url("../public/svgviewer-output\(1\).svg"); /* Path to your noise texture */
   background-repeat: repeat;
   background-size: contain;
+  color: white;
+}
+
+* {
+  color: white;
 }

@@ -3,20 +3,21 @@ import defaultImg from "@/public/default.png";
 import Link from "next/link";
 import Image from "next/image";
 import { UnstyledButton, Tooltip, Text } from "@mantine/core";
-import { getSession } from "@/app/lib/getSession";
 import { auth } from "@/auth";
 import { Session } from "next-auth";
 
-export function MiniProfile() {
-  const session: any = async () => {
-    const data = await auth();
-    return data;
-  };
+async function getSession() {
+  const data = await auth();
+  return data;
+}
+
+export async function MiniProfile() {
+  const session = await getSession();
   // replace with logic to get user profile picture if one exists and link to profile page
   return (
     <>
       {session?.user ? (
-        <UnstyledButton visibleFrom="xs">
+        <UnstyledButton mt="sm" visibleFrom="xs">
           <Image
             src={defaultImg}
             width="50"

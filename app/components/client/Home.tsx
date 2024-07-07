@@ -10,7 +10,7 @@ import Socials from "./Socials";
 
 export default function Home({ children }: { children: React.ReactNode }) {
   return (
-    <Stack mt="10em" align="center">
+    <Stack mt="6em" align="center">
       <Image
         src={HeroLogo}
         style={{ maxWidth: 800, width: "90%", maxHeight: 255, height: "30%" }}

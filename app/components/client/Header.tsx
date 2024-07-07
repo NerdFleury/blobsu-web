@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Container, Group, Burger, Menu } from "@mantine/core";
+import { ReactElement, useEffect, useState } from "react";
+import { Container, Group, Burger, Menu, UnstyledButton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import BlobsuLogo from "@/public/headerlogo.png";
+import BlobsuLogo from "@/public/logo.png";
 import classes from "@/app/components/styles/Headers.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,7 +15,7 @@ const links = [
   { link: "/", label: "Rules" },
 ];
 
-export function Header({ children }: { children: any }) {
+export function Header({ children }: { children: ReactElement }) {
   const [opened, { toggle }] = useDisclosure(false);
 
   const [icon, setIcon] = useState<any | null>();
@@ -23,6 +23,7 @@ export function Header({ children }: { children: any }) {
 
   useEffect(() => {
     setIcon(children.props.children[0]);
+    console.log(children);
     setMobileLog(children.props.children[1]);
   }, [children]);
 
@@ -35,13 +36,30 @@ export function Header({ children }: { children: any }) {
   return (
     <header className={classes.header}>
       <Container className={classes.inner}>
-        <Container p={0} m={0} visibleFrom="xs">
+        <Container mt="sm" p={0} m={0} visibleFrom="xs">
           <Image src={BlobsuLogo} width={60} height={60} alt="logo" />
         </Container>
         <Group align="center" gap={5} visibleFrom="xs">
           {items}
         </Group>
         {icon}
+        <UnstyledButton
+          component={Link}
+          onClick={opened ? toggle : undefined}
+          href="/"
+          p={0}
+          m={0}
+          mt="sm"
+          hiddenFrom="xs"
+        >
+          <Image
+            quality={100}
+            src={BlobsuLogo}
+            width={50}
+            height={50}
+            alt="logo"
+          />
+        </UnstyledButton>
         <Menu width="97vw">
           <Menu.Target>
             <Burger
@@ -52,17 +70,19 @@ export function Header({ children }: { children: any }) {
             />
           </Menu.Target>
 
-          <Menu.Dropdown mt="md">
-            <Menu.Item onClick={toggle} component={Link} href="/">
-              Home
-            </Menu.Item>
-            <Menu.Item onClick={toggle} component={Link} href="/leaderboard">
+          <Menu.Dropdown
+            onClick={toggle}
+            hiddenFrom="xs"
+            bg="black"
+            className={classes.menu}
+          >
+            <Menu.Item c="white" component={Link} href="/leaderboard">
               Leaderboard
             </Menu.Item>
-            <Menu.Item onClick={toggle} component={Link} href="/">
+            <Menu.Item c="white" component={Link} href="/">
               Top Plays
             </Menu.Item>
-            <Menu.Item onClick={toggle} component={Link} href="/">
+            <Menu.Item c="white" component={Link} href="/">
               Rules
             </Menu.Item>
             {mobileLog}

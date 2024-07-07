@@ -1,5 +1,3 @@
-"use client";
-
 import "@mantine/core/styles.css";
 import {
   ColorSchemeScript,
@@ -7,6 +5,9 @@ import {
   AppShell,
   Text,
   DEFAULT_THEME,
+  AppShellFooter,
+  AppShellHeader,
+  AppShellMain,
 } from "@mantine/core";
 import { Header } from "./components/client/Header";
 import Footer from "./components/client/Footer";
@@ -43,19 +44,19 @@ export default function RootLayout({
           }}
         >
           <AppShell header={{ height: 56 }}>
-            <AppShell.Header withBorder={false}>
+            <AppShellHeader withBorder={false}>
               <Header>
                 <Suspense fallback={<Loader />}>
                   <MiniProfile />
                   <MobileProfile />
                 </Suspense>
               </Header>
-            </AppShell.Header>
+            </AppShellHeader>
             <Background />
-            <AppShell.Main>{children}</AppShell.Main>
-            <AppShell.Footer pos={"static"} withBorder={false}>
+            <AppShellMain>{children}</AppShellMain>
+            <AppShellFooter pos={"static"} withBorder={false}>
               <Footer />
-            </AppShell.Footer>
+            </AppShellFooter>
           </AppShell>
         </MantineProvider>
       </body>
