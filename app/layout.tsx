@@ -3,7 +3,6 @@ import {
   ColorSchemeScript,
   MantineProvider,
   AppShell,
-  Text,
   DEFAULT_THEME,
   AppShellFooter,
   AppShellHeader,
@@ -16,14 +15,13 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { MiniProfile } from "./components/server/HeaderProfile";
 import { MobileProfile } from "./components/server/MobileHeaderProfile";
-import localFont from "next/font/local";
 import Background from "./components/client/Background";
 import "./globals.css";
 import Loader from "./loading";
 
 export const metadata: Metadata = {
   title: "Blobsu Server",
-  description: 'A private server with a "unique" concept',
+  description: 'An osu! private server with a "unique" concept',
 };
 
 export default function RootLayout({
@@ -34,15 +32,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <ColorSchemeScript />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link
-          rel="apple-touch-icon"
-          href="/apple-icon.png"
-          type="image/png"
-          sizes="180x180"
+        <link rel="icon" sizes="any" />
+        <link rel="apple-touch-icon" type="image/png" sizes="180x180" />
+        <link rel="icon" type="image/png" sizes="192x192" />
+        <meta property="og:title" content="Blobsu" />
+        <meta
+          property="og:description"
+          content="A private osu! server by Pana"
         />
-        <link rel="icon" href="/icon.png" type="image/png" sizes="192x192" />
+        <ColorSchemeScript />
       </head>
 
       <body>

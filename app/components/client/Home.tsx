@@ -26,7 +26,7 @@ export default function Home({ children }: { children: React.ReactNode }) {
         radius="md"
         size="lg"
         component={Link}
-        href="/create"
+        href="/connect"
       >
         How To Connect
       </Button>
