@@ -11,7 +11,7 @@ import Link from "next/link";
 const links = [
   { link: "/", label: "Home" },
   { link: "/leaderboard", label: "Leaderboard" },
-  { link: "/", label: "Top Plays" },
+  { link: "/topplays/0/1", label: "Top Plays" },
   { link: "/", label: "Rules" },
 ];
 
@@ -78,7 +78,7 @@ export function Header({ children }: { children: ReactElement }) {
             <Menu.Item c="white" component={Link} href="/leaderboard">
               Leaderboard
             </Menu.Item>
-            <Menu.Item c="white" component={Link} href="/">
+            <Menu.Item c="white" component={Link} href="/topplays/0/1">
               Top Plays
             </Menu.Item>
             <Menu.Item c="white" component={Link} href="/">
