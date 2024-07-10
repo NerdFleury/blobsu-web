@@ -84,7 +84,7 @@ export default async function TopPlaysTable({
   if (isNaN(parseInt(mode)) || isNaN(parseInt(slug))) {
     redirect("/");
   }
-  const res = await fetch(`http://localhost:3000/api/scores/${mode}/${slug}`, {
+  const res = await fetch(`https://www.blobsu.xyz/api/scores/${mode}/${slug}`, {
     method: "GET",
     next: {
       revalidate: 180,
