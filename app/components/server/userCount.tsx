@@ -20,21 +20,21 @@ async function fetchNumberofUsers() {
 
 export default async function UserCount() {
   const data = await fetchNumberofUsers();
-  const weight = 500;
+  const weight = 400;
   const size = "30";
   return (
-    <Group gap="xs" mt="xl" bg="black" style={{ borderRadius: 10 }} px={12}>
-      <Text size="xl" c="blue" fw={weight}>
+    <Group gap="xs" mt="6em" bg="black" style={{ borderRadius: 10 }} px={12}>
+      <Text size="lg" c="blue" fw={weight}>
         {data.total}
       </Text>
-      <Text size="xl" fw={weight}>
+      <Text size="lg" fw={weight}>
         Total Users
       </Text>
       &nbsp;&nbsp;
-      <Text size="xl" c="#ff001e" fw={weight}>
+      <Text size="lg" c="#ff001e" fw={weight}>
         {data.online}
       </Text>
-      <Text size="xl" fw={weight}>
+      <Text size="lg" fw={weight}>
         Online
       </Text>
     </Group>

@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 import { login } from "../lib/loginAction";
 import Link from "next/link";
+import { revalidatePath } from "next/cache";
 
 const theme = createTheme({
   components: {
@@ -48,6 +49,7 @@ export default function AuthenticationTitle() {
   useEffect(() => {
     if (state?.message === "Success") {
       router.push("/");
+      router.refresh();
     }
   }, [state, router]);
 

@@ -7,15 +7,38 @@ async function getSession() {
   return data;
 }
 
+async function getUserId(user: any) {
+  const response = await fetch(
+    `https://api.blobsu.xyz/v1/get_player_info?scope=info&name=${user.name}`,
+    {
+      method: "GET",
+    }
+  );
+  const data = await response.json();
+  return data.player.info.id;
+}
+
 export async function MobileProfile() {
   const session = await getSession();
-  // replace with logic to get user profile picture if one exists and link to profile page
+  let id = 0;
+  if (session?.user) {
+    id = await getUserId(session.user);
+  }
   return (
     <>
       {session?.user ? (
-        <MenuItem c="white" hiddenFrom="xs">
-          Logged In (under construction)
-        </MenuItem>
+        <>
+          <MenuItem
+            component={Link}
+            href={`/user/${id.toString()}`}
+            hiddenFrom="xs"
+          >
+            Profile
+          </MenuItem>
+          <MenuItem component={Link} href="/settings" hiddenFrom="xs">
+            Settings
+          </MenuItem>
+        </>
       ) : (
         <>
           <MenuDivider hiddenFrom="xs" />

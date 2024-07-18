@@ -204,6 +204,7 @@ export default function Page({
               region={userData!.info.country}
               creation_time={userData!.info.creation_time}
               latest_activity={userData!.info.latest_activity}
+              userid={params.slug}
             />
           ) : (
             <LoadingDef />

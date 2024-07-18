@@ -1,12 +1,12 @@
 .header {
-  height: rem(62px);
+  height: rem(54px);
   margin-bottom: rem(120px);
   background-color: #000000;
   border-color: #000000;
 }
 
 .inner {
-  height: rem(56px);
+  height: rem(54px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,13 +15,14 @@
 .link {
   display: block;
   line-height: 1;
-  padding: rem(24px) rem(12px);
+  padding: rem(20px) rem(12px);
+
   border-bottom: rem(3px) transparent solid;
   text-decoration: none;
-  color: white;
-  font-size: 1.2em;
-  font-weight: 500;
-  transition: border-color 100ms ease, color 100ms ease;
+  color: rgb(183, 183, 183);
+  font-size: 0.9em;
+  font-weight: 400;
+  transition: border-color 200ms ease, color 200ms ease;
 
   @mixin hover {
     color: var(--mantine-color-white);

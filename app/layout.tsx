@@ -54,7 +54,7 @@ export default function RootLayout({
             },
           }}
         >
-          <AppShell header={{ height: 56 }}>
+          <AppShell header={{ height: 54 }}>
             <AppShellHeader withBorder={false}>
               <Header>
                 <Suspense fallback={<Loader />}>

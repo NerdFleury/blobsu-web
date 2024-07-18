@@ -129,6 +129,7 @@ export default function Leaderboard({
           striped
           stripedColor="#053f47"
           highlightOnHover
+          highlightOnHoverColor="#0e5761"
           withRowBorders={false}
         >
           <TableThead>

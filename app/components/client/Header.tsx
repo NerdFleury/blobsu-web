@@ -9,7 +9,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const links = [
-  { link: "/", label: "Home" },
   { link: "/leaderboard", label: "Leaderboard" },
   { link: "/topplays/0/1", label: "Top Plays" },
   { link: "/", label: "Rules" },
@@ -35,10 +34,10 @@ export function Header({ children }: { children: ReactElement }) {
   return (
     <header className={classes.header}>
       <Container className={classes.inner}>
-        <Container mt="sm" p={0} m={0} visibleFrom="xs">
-          <Image src={BlobsuLogo} width={60} height={60} alt="logo" />
-        </Container>
-        <Group align="center" gap={5} visibleFrom="xs">
+        <UnstyledButton component={Link} href="/" mt="0.5em" visibleFrom="xs">
+          <Image src={BlobsuLogo} width={48} height={48} alt="logo" />
+        </UnstyledButton>
+        <Group ml={"10%"} justify="flex-end" gap={5} visibleFrom="xs">
           {items}
         </Group>
         {icon}
@@ -75,13 +74,13 @@ export function Header({ children }: { children: ReactElement }) {
             bg="black"
             className={classes.menu}
           >
-            <Menu.Item c="white" component={Link} href="/leaderboard">
+            <Menu.Item component={Link} href="/leaderboard">
               Leaderboard
             </Menu.Item>
-            <Menu.Item c="white" component={Link} href="/topplays/0/1">
+            <Menu.Item component={Link} href="/topplays/0/1">
               Top Plays
             </Menu.Item>
-            <Menu.Item c="white" component={Link} href="/">
+            <Menu.Item component={Link} href="/">
               Rules
             </Menu.Item>
             {mobileLog}

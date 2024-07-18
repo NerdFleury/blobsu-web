@@ -1,7 +1,8 @@
 "use server";
 
 import { writeFile } from "fs/promises";
-import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function UploadAvatar(formData: FormData) {
   console.log(formData.get("image"));
@@ -11,22 +12,19 @@ export async function UploadAvatar(formData: FormData) {
   const extension = image.name.split(".").pop();
   const buffer = Buffer.from(await image.arrayBuffer());
 
-  console.log(userid);
-  console.log(extension);
-
-  if (image.size > 5e6 || image.size == 0) {
+  if (image.size > 4e6 || image.size == 0) {
     return;
   }
 
   const path = process.env.PATH_TO_FILE! + userid?.toString() + "." + extension;
 
-  console.log(path);
-
   try {
     await writeFile(path, buffer);
-    return NextResponse.json({ Message: "Success", status: 201 });
+    console.log("I win?");
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ Message: "Failed", status: 500 });
+    return;
   }
+  revalidatePath("/settings, layout");
+  redirect("/settings");
 }

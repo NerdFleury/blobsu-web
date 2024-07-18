@@ -6,6 +6,7 @@ import {
   rem,
   Stack,
   useMantineTheme,
+  Center,
 } from "@mantine/core";
 import { IconUserCircle } from "@tabler/icons-react";
 import classes from "../styles/StatsCard.module.css";
@@ -24,6 +25,7 @@ export function StatsCard({
   acc,
   latest_activity,
   creation_time,
+  userid,
 }: {
   name: string;
   globalRank: number;
@@ -33,6 +35,7 @@ export function StatsCard({
   acc: number;
   latest_activity: number;
   creation_time: number;
+  userid: string;
 }) {
   const theme = useMantineTheme();
   return (
@@ -48,10 +51,10 @@ export function StatsCard({
       >
         <ThemeIcon className={classes.icon} size={90} radius={90}>
           <Image
-            src={defaultImg}
+            src={`https://a.blobsu.xyz/${userid}`}
             width="90"
             height="90"
-            alt="default pfp"
+            alt="user avatar"
             style={{ borderRadius: 90 }}
           />
         </ThemeIcon>
@@ -59,9 +62,14 @@ export function StatsCard({
         <Text ta="center" fw={700} className={classes.title}>
           {name}
         </Text>
-        <Text c="dimmed" ta="center" fz="lg">
-          {region}
-        </Text>
+        <Center mt="sm">
+          <Image
+            src={`https://flagcdn.com/w40/${region}.png`}
+            width={24}
+            height={16}
+            alt={region}
+          />
+        </Center>
 
         <Group justify="center" mt="xs" grow>
           <Stack align="center" gap={0}>

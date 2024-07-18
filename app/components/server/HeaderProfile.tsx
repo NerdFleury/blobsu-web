@@ -2,7 +2,17 @@ import { IconUserCircle } from "@tabler/icons-react";
 import defaultImg from "@/public/default.png";
 import Link from "next/link";
 import Image from "next/image";
-import { UnstyledButton, Tooltip, Text } from "@mantine/core";
+import {
+  UnstyledButton,
+  Tooltip,
+  Text,
+  Button,
+  Group,
+  Menu,
+  MenuTarget,
+  MenuDropdown,
+  MenuItem,
+} from "@mantine/core";
 import { auth } from "@/auth";
 import { Session } from "next-auth";
 
@@ -11,34 +21,63 @@ async function getSession() {
   return data;
 }
 
+async function getUserId(user: any) {
+  const response = await fetch(
+    `https://api.blobsu.xyz/v1/get_player_info?scope=info&name=${user.name}`,
+    {
+      method: "GET",
+    }
+  );
+  const data = await response.json();
+  return data.player.info.id;
+}
+
 export async function MiniProfile() {
   const session = await getSession();
-  // replace with logic to get user profile picture if one exists and link to profile page
+  let id = 0;
+  if (session?.user) {
+    id = await getUserId(session.user);
+  }
   return (
     <>
       {session?.user ? (
-        <UnstyledButton mt="sm" visibleFrom="xs">
-          <Image
-            src={defaultImg}
-            width="50"
-            height="50"
-            alt="default pfp"
-            style={{ borderRadius: 90 }}
-          />
-        </UnstyledButton>
+        <Menu>
+          <MenuTarget>
+            <UnstyledButton mt="0.4em" visibleFrom="xs">
+              <Image
+                src={`https://a.blobsu.xyz/${id.toString()}`}
+                width="46"
+                height="46"
+                alt="default pfp"
+                style={{ borderRadius: 90 }}
+              />
+            </UnstyledButton>
+          </MenuTarget>
+
+          <MenuDropdown visibleFrom="xs" bg="#022429">
+            <MenuItem component={Link} href={`/user/${id.toString()}`}>
+              Profile
+            </MenuItem>
+            <MenuItem component={Link} href="/settings">
+              Settings
+            </MenuItem>
+          </MenuDropdown>
+        </Menu>
       ) : (
-        <Tooltip
-          position="left"
-          visibleFrom="md"
-          opened
-          label="Sign Up/Login"
-          color="#04505c"
-          withArrow
-        >
-          <UnstyledButton visibleFrom="xs" component={Link} href="/login">
-            <IconUserCircle fill="white" width="lg" height="50" />
-          </UnstyledButton>
-        </Tooltip>
+        <Group>
+          <Button size="xs" variant="filled" component={Link} href={"/create"}>
+            Sign Up
+          </Button>
+          <Button
+            size="xs"
+            fw={400}
+            variant="outline"
+            component={Link}
+            href={"/login"}
+          >
+            Log in
+          </Button>
+        </Group>
       )}
     </>
   );
