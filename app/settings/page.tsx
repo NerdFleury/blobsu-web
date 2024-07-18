@@ -32,7 +32,7 @@ export default async function Page() {
               style={{ borderRadius: 20 }}
               width={90}
               height={90}
-              src={`https://a.blobsu.xyz/${id.toString()}`}
+              src={`https://a.blobsu.xyz/${id.toString()}.png`}
               alt="user's profile picture"
             />
           </Center>
