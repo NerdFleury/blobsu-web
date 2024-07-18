@@ -49,7 +49,7 @@ export default function AuthenticationTitle() {
     if (state?.message === "Success") {
       router.push("/");
     }
-  }, [state]);
+  }, [state, router]);
 
   return (
     <Container size={420} my={40}>
@@ -63,11 +63,11 @@ export default function AuthenticationTitle() {
         <MantineProvider theme={theme} defaultColorScheme="dark">
           <Paper shadow="md" bg="#00292e" p={30} mt={30} radius="md">
             <TextInput
-              label="Email"
-              name="email"
-              type="email"
+              label="Username"
+              name="user"
+              type="text"
               variant="filled"
-              placeholder="example@gmail.com"
+              placeholder="Your username"
               required
             />
             <PasswordInput

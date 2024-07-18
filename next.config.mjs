@@ -8,6 +8,12 @@ const nextConfig = {
         port: "",
         pathname: "/w40/**",
       },
+      {
+        protocol: "https",
+        hostname: "a.blobsu.xyz",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

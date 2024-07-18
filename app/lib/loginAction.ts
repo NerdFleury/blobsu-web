@@ -6,7 +6,7 @@ import { isRedirectError } from "next/dist/client/components/redirect";
 export async function login(prevState: any, formData: FormData) {
   const login = new FormData();
 
-  login.append("email", formData.get("email")!);
+  login.append("name", formData.get("user")!);
   login.append("password", formData.get("password")!);
 
   try {
@@ -18,7 +18,7 @@ export async function login(prevState: any, formData: FormData) {
       };
     }
     return {
-      message: "Email or Password is Incorrect",
+      message: "Username or Password is Incorrect or User doesnt exist",
     };
   }
 }

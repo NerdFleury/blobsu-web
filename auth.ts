@@ -10,18 +10,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
       credentials: {
-        email: {},
+        name: {},
         password: {},
         csrfToken: {},
       },
       authorize: async (credentials: any) => {
         try {
-          const { email, password } = await signInSchema.parseAsync(
-            credentials
-          );
+          const { name, password } = await signInSchema.parseAsync(credentials);
           const userdata = new URLSearchParams();
           userdata.append("user[pass]", password);
-          userdata.append("user[email]", email);
+          userdata.append("user[name]", name);
           userdata.append("user[secret]", process.env.ACCESS_SECRET!);
 
           const data = await fetch(
@@ -36,7 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           );
 
           if (data.status !== 200) {
-            throw new Error("Incorrect email or password");
+            throw new Error("Incorrect username or password");
           }
           return credentials;
         } catch (error) {
