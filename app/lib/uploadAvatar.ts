@@ -3,6 +3,7 @@
 import { writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import sharp from "sharp";
 
 export async function UploadAvatar(formData: FormData) {
   console.log(formData.get("image"));
@@ -16,15 +17,25 @@ export async function UploadAvatar(formData: FormData) {
     return;
   }
 
-  const path = process.env.PATH_TO_FILE! + userid?.toString() + "." + extension;
+  let path = process.env.PATH_TO_FILE! + userid?.toString();
 
   try {
-    await writeFile(path, buffer);
+    let processedBuffer = buffer;
+    if (
+      extension!.toLowerCase() === "jpg" ||
+      extension!.toLowerCase() === "jpeg"
+    ) {
+      path += ".png";
+      processedBuffer = await sharp(buffer).png().toBuffer();
+    } else {
+      path += "." + extension;
+    }
+
+    await writeFile(path, processedBuffer);
     console.log("I win?");
   } catch (error) {
     console.log(error);
     return;
   }
-  revalidatePath("/settings, layout");
   redirect("/settings");
 }
