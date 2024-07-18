@@ -47,5 +47,5 @@ export async function UploadAvatar(formData: FormData) {
     console.log(error);
     return;
   }
-  redirect("/settings");
+  revalidatePath("/settings", "layout");
 }
