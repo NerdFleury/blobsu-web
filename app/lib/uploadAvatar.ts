@@ -3,28 +3,38 @@
 import { writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import Jimp from "jimp";
 
 export async function UploadAvatar(formData: FormData) {
   console.log(formData.get("image"));
 
   const image: File = formData.get("image") as File;
   const userid = formData.get("userid");
-  const extension = image.name.split(".").pop();
+  const extension = image.name.split(".").pop()!.toLowerCase();
   const buffer = Buffer.from(await image.arrayBuffer());
 
-  if (image.size > 4e6 || image.size == 0) {
+  if (image.size > 4e6 || image.size === 0) {
     return;
   }
 
-  const path = process.env.PATH_TO_FILE! + userid?.toString() + "." + extension;
+  const isJPEG = extension === "jpg" || extension === "jpeg";
+  const newPath = process.env.PATH_TO_FILE! + userid?.toString() + ".png";
 
   try {
-    await writeFile(path, buffer);
-    console.log("I win?");
+    let finalBuffer = buffer;
+
+    if (isJPEG) {
+      const jimpImage = await Jimp.read(buffer);
+      finalBuffer = await jimpImage.getBufferAsync(Jimp.MIME_PNG);
+    }
+
+    await writeFile(newPath, finalBuffer);
+    console.log("Image saved!");
   } catch (error) {
-    console.log(error);
+    console.error("Error saving image:", error);
     return;
   }
+
   revalidatePath("/settings, layout");
   redirect("/settings");
 }
