@@ -3,7 +3,7 @@
 import { writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createCanvas, loadImage } from "canvas";
+import Jimp from "jimp";
 
 export async function UploadAvatar(formData: FormData) {
   console.log(formData.get("image"));
@@ -20,34 +20,19 @@ export async function UploadAvatar(formData: FormData) {
   const isJPEG = extension === "jpg" || extension === "jpeg";
   const newPath = process.env.PATH_TO_FILE! + userid?.toString() + ".png";
 
-  if (isJPEG) {
-    try {
-      // Create a canvas and draw the image on it
-      const canvas = createCanvas(0, 0);
-      const ctx = canvas.getContext("2d");
-      const img = await loadImage(buffer);
+  try {
+    let finalBuffer = buffer;
 
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
-
-      // Convert the canvas to a buffer
-      const pngBuffer = canvas.toBuffer("image/png");
-
-      await writeFile(newPath, pngBuffer);
-      console.log("Image converted and saved!");
-    } catch (error) {
-      console.error("Error during image conversion:", error);
-      return;
+    if (isJPEG) {
+      const jimpImage = await Jimp.read(buffer);
+      finalBuffer = await jimpImage.getBufferAsync(Jimp.MIME_PNG);
     }
-  } else {
-    try {
-      await writeFile(newPath, buffer);
-      console.log("Image saved without conversion!");
-    } catch (error) {
-      console.error("Error saving image:", error);
-      return;
-    }
+
+    await writeFile(newPath, finalBuffer);
+    console.log("Image saved!");
+  } catch (error) {
+    console.error("Error saving image:", error);
+    return;
   }
 
   revalidatePath("/settings, layout");
