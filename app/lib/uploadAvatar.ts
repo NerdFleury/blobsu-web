@@ -36,5 +36,5 @@ export async function UploadAvatar(formData: FormData) {
   }
 
   revalidatePath("/settings, layout");
-  redirect("/settings");
+  redirect("https://www.blobsu.xyz/settings");
 }
