@@ -45,7 +45,7 @@ export async function MiniProfile() {
           <MenuTarget>
             <UnstyledButton mt="0.4em" visibleFrom="xs">
               <Image
-                src={`https://a.blobsu.xyz/${id}.png`}
+                src={`https://a.blobsu.xyz/${id}`}
                 width="46"
                 height="46"
                 alt="default pfp"
