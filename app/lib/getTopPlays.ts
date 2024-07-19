@@ -16,16 +16,19 @@ function onlyUnique(value: any, index: any, array: string | any[]) {
   return array.indexOf(value) === index;
 }
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { slug: string; mode: string } }
-) {
+export async function getTopPlays({
+  slug,
+  mode,
+}: {
+  slug: string;
+  mode: string;
+}) {
   try {
-    let page = parseInt(params.slug);
+    let page = parseInt(slug);
     if (page > 10) {
       page = 10;
     }
-    let modequery = parseInt(params.mode);
+    let modequery = parseInt(mode);
     if (typeof page !== "number" || page > 1000000 || page < 1) {
       page = 1;
     }
@@ -93,11 +96,9 @@ export async function GET(
     };
 
     db.release();
-
-    return NextResponse.json(data);
+    return data;
   } catch (error) {
     console.log(error);
-    console.log(NextResponse.json(error));
-    return NextResponse.json(error);
+    return error;
   }
 }

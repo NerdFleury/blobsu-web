@@ -12,6 +12,8 @@ import {
 } from "@mantine/core";
 import { redirect } from "next/navigation";
 import PlaysPagination from "./PlaysPagination";
+import { getTopPlays } from "@/app/lib/getTopPlays";
+import { useEffect, useState } from "react";
 
 interface TableElement {
   TableArray: TableArray[];
@@ -62,6 +64,15 @@ const MODS = {
   MR: 1 << 30,
 };
 
+function pageCount(count: number) {
+  let pagecount = Math.ceil(count / 50);
+
+  if (pagecount > 10) {
+    pagecount = 10;
+  }
+  return pagecount;
+}
+
 function getMods(bitmask: number): string[] {
   const activeMods: string[] = [];
 
@@ -74,7 +85,7 @@ function getMods(bitmask: number): string[] {
   return activeMods;
 }
 
-export default async function TopPlaysTable({
+export default function TopPlaysTable({
   mode,
   slug,
 }: {
@@ -84,21 +95,22 @@ export default async function TopPlaysTable({
   if (isNaN(parseInt(mode)) || isNaN(parseInt(slug))) {
     redirect("/");
   }
-  const res = await fetch(`https://www.blobsu.xyz/api/scores/${mode}/${slug}`, {
-    method: "GET",
-    next: {
-      revalidate: 180,
-    },
-  });
+
+  const [data, setData] = useState<TableElement>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res: TableElement = (await getTopPlays({
+        slug: slug,
+        mode: mode,
+      })) as TableElement;
+      setData(res);
+    };
+    fetchData().catch((e) => {});
+  }, [mode, slug]);
+
   const page = (parseInt(slug) - 1) * 50;
-  const nmode = parseInt(mode);
 
-  const data: TableElement = await res.json();
-  let pagecount = Math.ceil(data.pagecount / 50);
-
-  if (pagecount > 10) {
-    pagecount = 10;
-  }
   return (
     <div style={{ paddingLeft: 10 }}>
       <TableScrollContainer minWidth={510} type="native">
@@ -144,7 +156,13 @@ export default async function TopPlaysTable({
         </Table>
       </TableScrollContainer>
       <Center mt="lg" mb="xl">
-        <PlaysPagination slug={slug} mode={mode} pagecount={pagecount} />
+        {data ? (
+          <PlaysPagination
+            slug={slug}
+            mode={mode}
+            pagecount={pageCount(data.pagecount)}
+          />
+        ) : null}
       </Center>
     </div>
   );
