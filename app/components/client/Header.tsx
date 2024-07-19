@@ -9,7 +9,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const links = [
-  { link: "/leaderboard", label: "Leaderboard" },
+  { link: "/leaderboard", label: "Performance" },
+  { link: "/scorerank", label: "Score Rankings" },
   { link: "/topplays/0/1", label: "Top Plays" },
   { link: "/", label: "Rules" },
 ];
