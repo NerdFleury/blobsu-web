@@ -9,7 +9,7 @@ export const signInSchema = object({
         const hasUnderscore = value.includes("_");
         const hasSpace = value.includes(" ");
 
-        return !(hasUnderscore && hasSpace); // Ensure both are not present
+        return !(hasUnderscore && hasSpace);
       },
       {
         message: "Invalid username",

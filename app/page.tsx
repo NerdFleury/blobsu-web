@@ -1,6 +1,6 @@
-import Home from "./components/client/Home";
+import Home from "./components/Home/Home";
 import { Suspense } from "react";
-import UserCount from "./components/server/userCount";
+import UserCount from "./components/Home/userCount";
 
 export default function Page() {
   return (

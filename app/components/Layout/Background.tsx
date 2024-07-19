@@ -9,6 +9,7 @@ export default function Background() {
         alt="background"
         placeholder="blur"
         quality={100}
+        priority
         style={{
           zIndex: -1,
           objectFit: "cover",

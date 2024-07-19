@@ -1,16 +1,5 @@
 "use server";
-
-import { NextRequest, NextResponse } from "next/server";
 import pool from "@/app/lib/mysql";
-import { redirect } from "next/navigation";
-
-interface score {
-  userid: number;
-  pp: number;
-  acc: number;
-  mods: number;
-  map_md5: string;
-}
 
 function onlyUnique(value: any, index: any, array: string | any[]) {
   return array.indexOf(value) === index;

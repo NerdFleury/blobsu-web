@@ -11,7 +11,7 @@ import {
   Input,
   MantineProvider,
 } from "@mantine/core";
-import { SubmitButton } from "../components/client/SubmitButton";
+import { SubmitButton } from "../components/Create/SubmitButton";
 import classes from "../components/styles/AuthenticationTitle.module.css";
 import { handleSubmit } from "../lib/createUser";
 import { useFormState } from "react-dom";

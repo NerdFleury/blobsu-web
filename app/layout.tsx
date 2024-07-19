@@ -8,14 +8,14 @@ import {
   AppShellHeader,
   AppShellMain,
 } from "@mantine/core";
-import { Header } from "./components/client/Header";
-import Footer from "./components/client/Footer";
+import { Header } from "./components/Layout/Header";
+import Footer from "./components/Layout/Footer";
 import { Poppins } from "./styles/Poppins/Poppins";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { MiniProfile } from "./components/server/HeaderProfile";
-import { MobileProfile } from "./components/server/MobileHeaderProfile";
-import Background from "./components/client/Background";
+import { MiniProfile } from "./components/Layout/HeaderProfile";
+import { MobileProfile } from "./components/Layout/MobileHeaderProfile";
+import Background from "./components/Layout/Background";
 import "./globals.css";
 import Loader from "./loading";
 

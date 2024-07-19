@@ -1,0 +1,12 @@
+.heroimage {
+  max-width: 800px;
+  width: 90%;
+  max-height: 255px;
+  height: 30%;
+}
+
+.heading {
+  text-align: center;
+  font-weight: 500;
+  color: #ffffff;
+}

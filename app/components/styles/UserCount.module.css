@@ -1,0 +1,8 @@
+.countbox {
+  gap: var(--mantine-spacing-xs);
+  margin-top: 6em;
+  background-color: black;
+  border-radius: var(--mantine-radius-xl);
+  padding: 0 12px;
+  font-weight: 400;
+}

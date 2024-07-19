@@ -1,15 +1,14 @@
 "use client";
+
 import Loading from "./loading";
-import Leaderboard from "../components/server/leaderboardData";
+import Leaderboard from "../components/Performance/leaderboardData";
 import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { Stack, Title, Group, Button } from "@mantine/core";
-import { useRouter } from "next/navigation";
-import { ModeSwitch } from "../components/client/FloatingIndicator";
+import { Stack, Title } from "@mantine/core";
+import { ModeSwitch } from "../components/Performance/FloatingIndicator";
 
 export default function LeaderboardPage() {
   const searchParams = useSearchParams();
-  const router = useRouter();
 
   useEffect(() => {
     searchParams;

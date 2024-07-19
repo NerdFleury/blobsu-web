@@ -1,10 +1,10 @@
 "use client";
 
-import TopPlaysTable from "@/app/components/server/TopPlaysTable";
+import TopPlaysTable from "@/app/components/TopPlays/TopPlaysTable";
 import { useParams } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "./loading";
-import { ModeSwitch } from "@/app/components/client/FloatingTopIndicator";
+import { ModeSwitch } from "@/app/components/TopPlays/FloatingTopIndicator";
 import { Stack, Title } from "@mantine/core";
 
 export default function Page() {

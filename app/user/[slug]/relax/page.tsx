@@ -1,8 +1,8 @@
 "use client";
 
-import Page from "@/app/components/server/userPage";
+import Page from "@/app/components/Profile/userPage";
 import { Suspense } from "react";
-import { ModeSwitch } from "@/app/components/client/FloatingUserIndicator";
+import { ModeSwitch } from "@/app/components/Profile/FloatingUserIndicator";
 
 export default function stdPage({ params }: { params: { slug: string } }) {
   return (

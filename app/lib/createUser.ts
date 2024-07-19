@@ -9,7 +9,7 @@ const nameSchema = z
       const hasUnderscore = value.includes("_");
       const hasSpace = value.includes(" ");
 
-      return !(hasUnderscore && hasSpace); // Ensure both are not present
+      return !(hasUnderscore && hasSpace);
     },
     {
       message: "Name can contain either a `_` or a ` `, but not both",

@@ -1,7 +1,6 @@
 "use client";
 
 import { Text, Title, Stack, Container } from "@mantine/core";
-import { ST } from "next/dist/shared/lib/utils";
 import Link from "next/link";
 
 export default function Page() {

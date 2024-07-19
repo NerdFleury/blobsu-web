@@ -57,6 +57,3 @@ export default async function Page() {
     </Center>
   );
 }
-
-// session would need to be in an external file
-// submission would need to follow the same form format

@@ -2,9 +2,9 @@
 
 import { Button, Center, Group, Stack, Table, Text } from "@mantine/core";
 import { Suspense, useEffect, useState } from "react";
-import { Plays } from "@/app/components/server/playerTable";
-import { StatsCard } from "@/app/components/server/userInfo";
-import { LoadingDef } from "../client/DefaultLoading";
+import { Plays } from "@/app/components/Profile/playerTable";
+import { StatsCard } from "@/app/components/Profile/userInfo";
+import { LoadingDef } from "../DefaultLoading";
 import { useRouter } from "next/navigation";
 
 interface Beatmap {

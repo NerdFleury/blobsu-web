@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import { IconUserCircle } from "@tabler/icons-react";
 import classes from "../styles/StatsCard.module.css";
-import TimeStamp from "../client/Timestamp";
+import TimeStamp from "./Timestamp";
 import Image from "next/image";
 import defaultImg from "@/public/default.png";
 
