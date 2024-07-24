@@ -1,12 +1,8 @@
-import { useState } from "react";
-import { FloatingIndicator, UnstyledButton } from "@mantine/core";
-import classes from "@/app/components/styles/Float.module.css";
-import Link from "next/link";
 import std from "@/public/stdlogo.svg";
 import mania from "@/public/manialogo.svg";
 import taiko from "@/public/taikologo.svg";
 import ctb from "@/public/catchlogo.svg";
-import Image from "next/image";
+import ModeSwitch from "../Table/FloatingIndicator";
 
 interface mode {
   name: string;
@@ -37,49 +33,10 @@ const data: mode[] = [
   },
 ];
 
-export function ModeSwitch() {
-  const [rootRef, setRootRef] = useState<HTMLDivElement | null>(null);
-  const [controlsRefs, setControlsRefs] = useState<
-    Record<number, HTMLAnchorElement | null>
-  >({});
-  const [active, setActive] = useState(0);
-
-  const setControlRef = (index: number) => (node: HTMLAnchorElement) => {
-    controlsRefs[index] = node;
-    setControlsRefs(controlsRefs);
-  };
-
-  const controls = data.map((item, index) => (
-    <UnstyledButton
-      key={item.name}
-      className={classes.control}
-      component={Link}
-      href={item.link}
-      ref={setControlRef(index)}
-      onClick={() => setActive(index)}
-      mod={{ active: active === index }}
-    >
-      <span className={classes.controlLabel}>
-        <Image
-          width={20}
-          height={20}
-          src={item.mode}
-          alt={item.name}
-          priority
-        />
-      </span>
-    </UnstyledButton>
-  ));
-
+export function Mode() {
   return (
-    <div className={classes.root} ref={setRootRef}>
-      {controls}
-
-      <FloatingIndicator
-        target={controlsRefs[active]}
-        parent={rootRef}
-        className={classes.indicator}
-      />
-    </div>
+    <>
+      <ModeSwitch data={data} />
+    </>
   );
 }

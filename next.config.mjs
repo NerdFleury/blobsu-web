@@ -6,7 +6,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "flagcdn.com",
         port: "",
-        pathname: "/w40/**",
+        pathname: "/w80/**",
       },
       {
         protocol: "https",

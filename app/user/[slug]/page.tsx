@@ -6,10 +6,8 @@ import { ModeSwitch } from "@/app/components/Profile/FloatingUserIndicator";
 
 export default function stdPage({ params }: { params: { slug: string } }) {
   return (
-    <ModeSwitch params={params}>
-      <Suspense>
-        <Page params={params} mode={0} />
-      </Suspense>
-    </ModeSwitch>
+    <Suspense>
+      <Page params={params} mode={0} />
+    </Suspense>
   );
 }

@@ -1,184 +1,66 @@
-import {
-  Table,
-  TableScrollContainer,
-  TableTbody,
-  TableTd,
-  TableTh,
-  TableThead,
-  Text,
-  TableTr,
-  UnstyledButton,
-} from "@mantine/core";
+"use client";
+
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import LeaderboardSkeleton from "../Table/Leaderboard";
+import TablePagination from "../Table/Pagination";
+import { Performance } from "./Types";
+import { getUserCount } from "@/app/lib/getUserCount";
+import { getLeaderboard } from "./Tools";
+import { Center } from "@mantine/core";
 
-interface leaderboard {
-  player_id: number;
-  name: string;
-  country: string;
-  tscore: number;
-  rscore: number;
-  pp: number;
-  plays: number;
-  playtime: number;
-  acc: number;
-  max_combo: number;
-  xh_count: number;
-  x_count: number;
-  sh_count: number;
-  s_count: number;
-  a_count: number;
-  clan_id: number | null;
-  clan_name: string | null;
-  clan_tag: string | null;
-}
-
-interface data {
-  status: string;
-  leaderboard: leaderboard[];
-}
-
-let offset = 0;
-
-async function fetchGlobal({
-  sort,
-  mode,
-  pageNumber,
-}: {
-  sort: string;
-  mode: number;
-  pageNumber: number;
-}) {
-  offset = 50 * (pageNumber - 1);
-  let data;
-  try {
-    const response = await fetch(
-      `https://api.blobsu.xyz/v1/get_leaderboard?sort=${sort}&mode=${mode}&limit=50&offset=${offset}`,
-      {
-        method: "GET",
-        cache: "no-store",
-      }
-    ).then((res) => {
-      res;
-      return res;
-    });
-    data = await response.json();
-    return data;
-  } catch (error) {
-    error;
-  }
-}
-
-async function getLeaderboard(searchParams: ReadonlyURLSearchParams) {
-  let leaderboard = null;
-  if (
-    !searchParams.has("sort") ||
-    !searchParams.has("mode") ||
-    !searchParams.has("pagenumber")
-  ) {
-    const data: data = await fetchGlobal({
-      sort: "rscore",
-      mode: 0,
-      pageNumber: 1,
-    }).then((res) => {
-      return res;
-    });
-    data;
-
-    leaderboard = data;
-  } else {
-    try {
-      const data: data = await fetchGlobal({
-        sort: searchParams.get("sort")!,
-        mode: parseInt(searchParams.get("mode")!),
-        pageNumber: parseInt(searchParams.get("pagenumber")!),
-      }).then((res) => {
-        return res;
-      });
-      leaderboard = data;
-    } catch (error) {
-      error;
-    }
-  }
-  return leaderboard;
-}
+export let offset = 0;
 
 export default function Leaderboard({
   searchParams,
 }: {
   searchParams: ReadonlyURLSearchParams;
 }) {
-  const [leaderboard, setLeaderboard] = useState<data>();
+  const [leaderboard, setLeaderboard] = useState<Performance[]>();
+  const [count, setCount] = useState<number>(0);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getLeaderboard(searchParams);
-      setLeaderboard(res!);
+      const Response = getLeaderboard(searchParams);
+      const FetchCount = getUserCount({
+        mode: parseInt(searchParams.get("mode")!),
+      });
+      const [res, fetchcount] = await Promise.all([Response, FetchCount]);
+      if (fetchcount["count(id)"] < 500) {
+        setCount(Math.ceil(fetchcount["count(id)"] / 50));
+      } else {
+        setCount(10);
+      }
+      setLeaderboard(
+        res?.leaderboard.map((player, index) => ({
+          player_id: player.player_id,
+          Rank: `#${offset + index + 1}`,
+          Country: player.country,
+          Player: player.name,
+          Playcount: player.plays,
+          Accuracy: `${player.acc.toFixed(2)}%`,
+          Score: player.rscore.toLocaleString("en-US"),
+        }))
+      );
     };
 
     fetchData().catch((e) => {});
   }, [searchParams]);
 
   return (
-    <div style={{ paddingLeft: 10 }}>
-      <TableScrollContainer minWidth={510} type="native">
-        <Table
-          align="center"
-          maw={"60%"}
-          striped
-          stripedColor="#053f47"
-          highlightOnHover
-          highlightOnHoverColor="#0e5761"
-          withRowBorders={false}
-        >
-          <TableThead>
-            <TableTr>
-              <TableTh>Rank</TableTh>
-              <TableTh>Country</TableTh>
-              <TableTh>Player</TableTh>
-              <TableTh>Play Count</TableTh>
-              <TableTh>Accuracy</TableTh>
-              <TableTh>Score</TableTh>
-            </TableTr>
-          </TableThead>
-          <TableTbody style={{ backgroundColor: "#042b30" }}>
-            {leaderboard
-              ? leaderboard.leaderboard.map((player, index) => (
-                  <TableTr key={player.name}>
-                    <TableTd fw={500}>#{offset + index + 1}</TableTd>
-                    <TableTd>
-                      <Image
-                        src={`https://flagcdn.com/w40/${player.country}.png`}
-                        width={24}
-                        height={16}
-                        alt={player.country}
-                      />
-                    </TableTd>
-
-                    <TableTd>
-                      {" "}
-                      <UnstyledButton
-                        component={Link}
-                        href={`/user/${player.player_id}`}
-                        fw={500}
-                      >
-                        {player.name}
-                      </UnstyledButton>
-                    </TableTd>
-
-                    <TableTd fw={500}>{player.plays}</TableTd>
-                    <TableTd fw={500}>{player.acc.toFixed(2)}%</TableTd>
-                    <TableTd fw={500}>
-                      {player.rscore.toLocaleString("en-US")}
-                    </TableTd>
-                  </TableTr>
-                ))
-              : null}
-          </TableTbody>
-        </Table>
-      </TableScrollContainer>
-      <Text mt="xl"></Text>
-    </div>
+    <>
+      {leaderboard ? <LeaderboardSkeleton data={leaderboard} /> : null}
+      <Center mt="xl">
+        <TablePagination
+          route="scorerank"
+          mode={searchParams.has("mode") ? searchParams.get("mode")! : "0"}
+          currentpage={
+            searchParams.has("pagenumber")
+              ? searchParams.get("pagenumber")!
+              : "1"
+          }
+          pagecount={count}
+        />
+      </Center>
+    </>
   );
 }

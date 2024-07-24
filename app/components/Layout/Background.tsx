@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Background() {
   return (
-    <div style={{ flexShrink: 0 }}>
+    <div>
       <Image
         src={back}
         alt="background"
@@ -15,7 +15,7 @@ export default function Background() {
           objectFit: "cover",
         }}
         fill
-        sizes="200vh"
+        sizes="400vh"
       />
     </div>
   );

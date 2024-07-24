@@ -1,17 +1,19 @@
 .root {
   position: relative;
   background-color: rgb(16, 16, 16);
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   border-radius: var(--mantine-radius-xl);
-  padding: 10px;
+  padding: 7px 9px;
   border: 0px;
 }
 
 .control {
-  padding: 5px 12px;
-  line-height: 0;
+  padding: 7px 9px;
+  line-height: 1;
   color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-2));
-  border-radius: var(--mantine-radius-xl);
+  border-radius: 100%;
   font-size: var(--mantine-font-size-xl);
   transition: color 100ms ease;
   align-items: center;
@@ -33,12 +35,12 @@
 }
 
 .controlLabel {
-  vertical-align: middle;
+  vertical-align: center;
   position: relative;
   z-index: 1;
 }
 
 .indicator {
   background-color: var(--mantine-primary-color-filled);
-  border-radius: 99px;
+  border-radius: 100%;
 }

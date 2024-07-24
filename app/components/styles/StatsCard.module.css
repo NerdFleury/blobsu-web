@@ -1,7 +1,7 @@
 .card {
   position: relative;
   overflow: visible;
-  padding: var(--mantine-spacing-xl);
+  padding: var(--mantine-spacing-xs);
   padding-top: calc(var(--mantine-spacing-xl) * 1.5 + rem(20px));
 }
 

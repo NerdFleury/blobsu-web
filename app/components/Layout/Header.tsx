@@ -11,7 +11,7 @@ import Link from "next/link";
 const links = [
   { link: "/leaderboard", label: "Performance" },
   { link: "/scorerank", label: "Score Rankings" },
-  { link: "/topplays/0/1", label: "Top Plays" },
+  { link: "/topplays", label: "Top Plays" },
   { link: "/", label: "Rules" },
 ];
 
@@ -38,7 +38,7 @@ export function Header({ children }: { children: ReactElement }) {
         <UnstyledButton component={Link} href="/" mt="0.5em" visibleFrom="xs">
           <Image src={BlobsuLogo} width={48} height={48} alt="logo" />
         </UnstyledButton>
-        <Group ml={"10%"} justify="flex-end" gap={5} visibleFrom="xs">
+        <Group justify="flex-end" gap={5} visibleFrom="xs">
           {items}
         </Group>
         {icon}
@@ -78,7 +78,7 @@ export function Header({ children }: { children: ReactElement }) {
             <Menu.Item component={Link} href="/leaderboard">
               Leaderboard
             </Menu.Item>
-            <Menu.Item component={Link} href="/topplays/0/1">
+            <Menu.Item component={Link} href="/topplays">
               Top Plays
             </Menu.Item>
             <Menu.Item component={Link} href="/">

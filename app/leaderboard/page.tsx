@@ -5,7 +5,7 @@ import Leaderboard from "../components/Performance/leaderboardData";
 import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Stack, Title } from "@mantine/core";
-import { ModeSwitch } from "../components/Performance/FloatingIndicator";
+import Switcher from "../components/Performance/FloatingIndicator";
 
 export default function LeaderboardPage() {
   const searchParams = useSearchParams();
@@ -17,7 +17,7 @@ export default function LeaderboardPage() {
     <>
       <Stack align="center" mb={"3em"} mt={"2em"}>
         <Title>Global Leaderboards</Title>
-        <ModeSwitch />
+        <Switcher />
       </Stack>
       <Suspense fallback={<Loading />}>
         <Leaderboard searchParams={searchParams} />

@@ -1,169 +1,26 @@
 "use client";
 
-import { Button, Center, Group, Stack, Table, Text } from "@mantine/core";
+import {
+  Button,
+  Center,
+  Grid,
+  GridCol,
+  Group,
+  Paper,
+  SimpleGrid,
+  Stack,
+  Table,
+  Text,
+} from "@mantine/core";
 import { Suspense, useEffect, useState } from "react";
 import { Plays } from "@/app/components/Profile/playerTable";
 import { StatsCard } from "@/app/components/Profile/userInfo";
 import { LoadingDef } from "../DefaultLoading";
 import { useRouter } from "next/navigation";
-
-interface Beatmap {
-  md5: string;
-  id: number;
-  set_id: number;
-  artist: string;
-  title: string;
-  version: string;
-  creator: string;
-  last_update: string;
-  total_length: number;
-  max_combo: number;
-  status: number;
-  plays: number;
-  passes: number;
-  mode: number;
-  bpm: number;
-  cs: number;
-  od: number;
-  ar: number;
-  hp: number;
-  diff: number;
-}
-
-interface Score {
-  id: number;
-  score: number;
-  pp: number;
-  acc: number;
-  max_combo: number;
-  mods: number;
-  n300: number;
-  n100: number;
-  n50: number;
-  nmiss: number;
-  ngeki: number;
-  nkatu: number;
-  grade: string;
-  status: number;
-  mode: number;
-  play_time: string;
-  time_elapsed: number;
-  perfect: number;
-  beatmap: Beatmap;
-}
-
-interface PlayerInfo {
-  id: number;
-  name: string;
-  safe_name: string;
-  priv: number;
-  country: string;
-  silence_end: number;
-  donor_end: number;
-  creation_time: number;
-  latest_activity: number;
-  clan_id: number;
-  clan_priv: number;
-  preferred_mode: number;
-  play_style: number;
-  custom_badge_name: string | null;
-  custom_badge_icon: string | null;
-  userpage_content: string | null;
-}
-
-interface ScoreTable {
-  scoreid: number;
-  mapName: string;
-  mapDifficulty: string;
-  mods: number;
-  accuracy: number;
-  pp: number;
-}
-
-interface PlayerStats {
-  id: number;
-  mode: number;
-  tscore: number;
-  rscore: number;
-  pp: number;
-  plays: number;
-  playtime: number;
-  acc: number;
-  max_combo: number;
-  total_hits: number;
-  replay_views: number;
-  xh_count: number;
-  x_count: number;
-  sh_count: number;
-  s_count: number;
-  a_count: number;
-  rank: number;
-  country_rank: number;
-}
-interface Player {
-  info: PlayerInfo;
-  stats: {
-    [key: string]: PlayerStats;
-  };
-}
-
-interface ApiResponse {
-  status: string;
-  player: Player;
-}
-
-interface PlayerScores {
-  id: number;
-  name: string;
-  clan: string | null;
-}
-
-interface ApiResponseScores {
-  status: string;
-  scores: Score[];
-  player: PlayerScores;
-}
-
-async function fetchUserData({ userId }: { userId: string }) {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PLAYER_INFO}?scope=all&id=${userId}`,
-    {
-      method: "GET",
-    }
-  );
-  const data: ApiResponse = await response.json();
-  data;
-  return data;
-}
-
-async function fetchTopPlays({
-  userId,
-  mode,
-}: {
-  userId: string;
-  mode: number;
-}) {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PLAYER_SCORES}?scope=best&id=${userId}&limit=20&mode=${mode}`,
-    {
-      method: "GET",
-    }
-  );
-  const data: ApiResponseScores = await response.json();
-  return data;
-}
-
-function necessaryData(rawData: Score[]) {
-  const newScores: ScoreTable[] = rawData.map((score) => ({
-    scoreid: score.id,
-    mapName: score.beatmap.title,
-    mapDifficulty: score.beatmap.version,
-    mods: score.mods,
-    accuracy: score.acc,
-    pp: score.pp,
-  }));
-  return newScores;
-}
+import Image from "next/image";
+import PlaceholderBanner from "@/public/layered-waves-haikei.png";
+import { ScoreTable, Player } from "./Types";
+import { fetchTopPlays, fetchUserData, necessaryData } from "./Tools";
 
 export default function Page({
   params,
@@ -192,32 +49,56 @@ export default function Page({
 
   return (
     <>
-      <Suspense fallback={<LoadingDef />}>
-        <Stack mt="xl" align="center">
-          {userData ? (
-            <StatsCard
-              name={userData!.info.name}
-              globalRank={userData!.stats[mode].rank}
-              countryRank={userData!.stats[mode].country_rank}
-              pp={userData!.stats[mode].pp}
-              acc={userData!.stats[mode].acc}
-              region={userData!.info.country}
-              creation_time={userData!.info.creation_time}
-              latest_activity={userData!.info.latest_activity}
-              userid={params.slug}
-            />
-          ) : (
-            <LoadingDef />
-          )}
-        </Stack>
-      </Suspense>
-      <Group mt="xl" justify="center"></Group>
-      <Suspense fallback={<LoadingDef />}>
-        <Center>
-          {scoreData ? <Plays scores={scoreData} /> : <LoadingDef />}
-        </Center>
-      </Suspense>
-      <Text mt="xl"></Text>
+      {" "}
+      <Image
+        src={PlaceholderBanner}
+        sizes="100vw"
+        style={{ width: "100%", height: "auto" }}
+        width={1920}
+        height={250}
+        unoptimized
+        alt="Profile Banner"
+      />
+      <Center>
+        <Paper p="xl" shadow="md" mb={"xl"} w={1000} bg="#02272b">
+          <Center>
+            <Grid w={1000} mt="xl" gutter="xl">
+              <Grid.Col mt="md" span={{ md: 3, xs: 1 }} h={"100vh"}>
+                <Suspense fallback={<LoadingDef />}>
+                  {userData ? (
+                    <StatsCard
+                      name={userData!.info.name}
+                      globalRank={userData!.stats[mode].rank}
+                      countryRank={userData!.stats[mode].country_rank}
+                      pp={userData!.stats[mode].pp}
+                      acc={userData!.stats[mode].acc}
+                      region={userData!.info.country}
+                      creation_time={userData!.info.creation_time}
+                      latest_activity={userData!.info.latest_activity}
+                      userid={params.slug}
+                      playcount={userData!.stats[mode].plays}
+                      playtime={userData!.stats[mode].playtime}
+                      totalhits={userData!.stats[mode].total_hits}
+                      maxcombo={userData!.stats[mode].max_combo}
+                      rscore={userData!.stats[mode].rscore}
+                      tscore={userData!.stats[mode].tscore}
+                    />
+                  ) : (
+                    <LoadingDef />
+                  )}
+                </Suspense>
+              </Grid.Col>
+              <Grid.Col span="auto">
+                <Suspense fallback={<LoadingDef />}>
+                  <Paper p="xl" bg="#022e33" maw={900} mt="-2em" w={"100%"}>
+                    {scoreData ? <Plays scores={scoreData} /> : <LoadingDef />}
+                  </Paper>
+                </Suspense>
+              </Grid.Col>
+            </Grid>
+          </Center>
+        </Paper>
+      </Center>
     </>
   );
 }

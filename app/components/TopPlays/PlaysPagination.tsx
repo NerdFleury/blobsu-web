@@ -1,7 +1,6 @@
 "use client";
 
-import { Pagination } from "@mantine/core";
-import { useRouter } from "next/navigation";
+import Pagination from "@/app/components/Table/Pagination";
 
 export default function PlaysPagination({
   mode,
@@ -12,15 +11,12 @@ export default function PlaysPagination({
   slug: string;
   pagecount: number;
 }) {
-  const router = useRouter();
-
   return (
     <Pagination
-      value={parseInt(slug)}
-      onChange={(e) => router.push(`/topplays/${parseInt(mode)}/${e}`)}
-      total={pagecount}
-      radius="xl"
-      withControls={false}
+      route="topplays"
+      mode={mode}
+      pagecount={10}
+      currentpage={slug}
     />
   );
 }

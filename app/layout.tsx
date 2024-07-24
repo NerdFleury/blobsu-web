@@ -63,7 +63,6 @@ export default function RootLayout({
                 </Suspense>
               </Header>
             </AppShellHeader>
-            <Background />
             <AppShellMain>{children}</AppShellMain>
             <AppShellFooter pos={"static"} withBorder={false}>
               <Footer />
