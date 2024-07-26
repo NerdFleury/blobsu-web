@@ -19,13 +19,7 @@ interface mode {
   link: string;
 }
 
-export function ModeSwitch({
-  params,
-  children,
-}: {
-  params: { slug: string };
-  children: React.ReactNode;
-}) {
+export function ModeSwitch({ params }: { params: { slug: string } }) {
   const data: mode[] = [
     {
       name: "standard",
@@ -60,11 +54,6 @@ export function ModeSwitch({
   >({});
   const [active, setActive] = useState(0);
 
-  const setControlRef = (index: number) => (node: HTMLButtonElement) => {
-    controlsRefs[index] = node;
-    setControlsRefs(controlsRefs);
-  };
-
   const controls = data.map((item, index) => (
     <UnstyledButton
       key={item.name}
@@ -88,18 +77,15 @@ export function ModeSwitch({
 
   return (
     <>
-      <Center mt="xl">
-        <div className={classes.root} ref={setRootRef}>
-          {controls}
+      <div className={classes.userroot} ref={setRootRef}>
+        {controls}
 
-          <FloatingIndicator
-            target={controlsRefs[active]}
-            parent={rootRef}
-            className={classes.indicator}
-          />
-        </div>
-      </Center>
-      {children}
+        <FloatingIndicator
+          target={controlsRefs[active]}
+          parent={rootRef}
+          className={classes.indicator}
+        />
+      </div>
     </>
   );
 }

@@ -13,22 +13,8 @@ export default function TimeStamp({
   const theme = useMantineTheme();
   return (
     <>
-      <Paper
-        radius="md"
-        bg="#00292e"
-        shadow="md"
-        w="100%"
-        className={classes.lastseencard}
-      >
-        <Group justify="center">
-          <Text size="xs" c="dimmed">
-            {formatRelativeTime(latest_activity)}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Registered {formatToMonthsAndYears(creation_time)}
-          </Text>
-        </Group>
-      </Paper>
+      <Text size="xs">{formatRelativeTime(latest_activity)}</Text>
+      <Text size="xs">Registered {formatToMonthsAndYears(creation_time)}</Text>
     </>
   );
 }

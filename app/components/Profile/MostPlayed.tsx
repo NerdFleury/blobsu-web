@@ -1,29 +1,27 @@
 "use client";
 
-import { Button, Spoiler, Stack, Title } from "@mantine/core";
+import {
+  Button,
+  Center,
+  Spoiler,
+  Stack,
+  Table,
+  Text,
+  Title,
+} from "@mantine/core";
+import { getMods } from "./Tools";
+import MostPlayedTableRow from "./PlayedTableRow";
+import { MostPlayedObject, MostPlayedSingle } from "./Types";
 
-import TopPlaysTableRow from "./TopPlayRow";
-
-interface score {
-  scoreid: number;
-  mapName: string;
-  mapDifficulty: string;
-  mods: number;
-  accuracy: number;
-  pp: number;
-  set_id: number;
-  rank: string;
-}
-
-export function Plays({ scores }: { scores: score[] }) {
+export function MostPlayed({ maps }: { maps: MostPlayedObject }) {
   return (
     <>
       <Stack mb="1em">
         <Title c="white" fw={500} order={3}>
-          Top Plays
+          Most Played
         </Title>
         <Spoiler
-          maxHeight={224}
+          maxHeight={220}
           styles={{ control: { right: 0 } }}
           showLabel=<Button
             color="gray"
@@ -34,7 +32,7 @@ export function Plays({ scores }: { scores: score[] }) {
             size="compact-xs"
             mt="sm"
           >
-            Show more Scores
+            Show more
           </Button>
           hideLabel=<Button
             color="gray"
@@ -45,20 +43,19 @@ export function Plays({ scores }: { scores: score[] }) {
             size="compact-xs"
             mt="sm"
           >
-            Hide Scores
+            Hide
           </Button>
         >
           <Stack gap="0.3em">
-            {scores.map((score: score) => (
-              <TopPlaysTableRow
-                key={score.scoreid}
+            {maps.maps.map((score: MostPlayedSingle) => (
+              <MostPlayedTableRow
+                key={`${score.set_id} + ${score.version}`}
                 set_id={score.set_id}
-                title={score.mapName}
-                version={score.mapDifficulty}
-                pp={score.pp}
-                rank={score.rank}
-                mods={score.mods}
-                acc={score.accuracy}
+                artist={score.artist}
+                title={score.title}
+                version={score.version}
+                creator={score.creator}
+                plays={score.plays}
               />
             ))}
           </Stack>

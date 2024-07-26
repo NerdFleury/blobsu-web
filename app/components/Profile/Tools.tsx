@@ -1,5 +1,11 @@
 import { MODS } from "./Constants";
-import { ApiResponse, ApiResponseScores, Score, ScoreTable } from "./Types";
+import {
+  ApiResponse,
+  ApiResponseScores,
+  MostPlayedObject,
+  Score,
+  ScoreTable,
+} from "./Types";
 
 export function formatRelativeTime(seconds: number) {
   const d = new Date();
@@ -80,6 +86,8 @@ export function necessaryData(rawData: Score[]) {
     mods: score.mods,
     accuracy: score.acc,
     pp: score.pp,
+    rank: score.grade,
+    set_id: score.beatmap.set_id,
   }));
   return newScores;
 }
@@ -90,6 +98,9 @@ export function getMods(bitmask: number): string[] {
     if ((bitmask & modValue) !== 0) {
       activeMods.push(modName);
     }
+  }
+  if (activeMods.length == 0) {
+    activeMods.push("NM");
   }
 
   return activeMods;
@@ -102,4 +113,21 @@ export function convertSeconds(seconds: number) {
     hours: hours,
     minutes: minutes,
   };
+}
+
+export async function fetchMostPlayed({
+  userId,
+  mode,
+}: {
+  userId: string;
+  mode: number;
+}) {
+  const response = await fetch(
+    `https://api.blobsu.xyz/v1/get_player_most_played?id=${userId}&limit=20&mode=${mode}`,
+    {
+      method: "GET",
+    }
+  );
+  const data: MostPlayedObject = await response.json();
+  return data;
 }

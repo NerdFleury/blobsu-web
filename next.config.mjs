@@ -14,6 +14,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "assets.ppy.sh",
+        port: "",
+        pathname: "/beatmaps/**",
+      },
     ],
     minimumCacheTTL: 1,
   },

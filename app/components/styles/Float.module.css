@@ -44,3 +44,14 @@
   background-color: var(--mantine-primary-color-filled);
   border-radius: 100%;
 }
+
+.userroot {
+  position: relative;
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: var(--mantine-radius-xl);
+  /* padding: 7px 9px; */
+  border: 0px;
+}

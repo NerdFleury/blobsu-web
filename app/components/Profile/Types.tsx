@@ -66,6 +66,8 @@ export interface ScoreTable {
   mods: number;
   accuracy: number;
   pp: number;
+  set_id: number;
+  rank: string;
 }
 interface PlayerStats {
   id: number;
@@ -106,4 +108,21 @@ export interface ApiResponseScores {
   status: string;
   scores: Score[];
   player: PlayerScores;
+}
+
+export interface MostPlayedSingle {
+  md5: string;
+  id: number;
+  set_id: number;
+  status: number;
+  artist: string;
+  title: string;
+  version: string;
+  creator: string;
+  plays: number;
+}
+
+export interface MostPlayedObject {
+  status: "string";
+  maps: MostPlayedSingle[];
 }
