@@ -64,17 +64,7 @@ export default function Page({
 
   return (
     <>
-      {" "}
-      <Image
-        src={PlaceholderBanner}
-        sizes="100vw"
-        style={{ width: "100%", height: "auto" }}
-        width={1920}
-        height={250}
-        unoptimized
-        alt="Profile Banner"
-      />
-      <Center>
+      <Center mt="xl">
         <Paper p="xl" shadow="md" mb={"xl"} w={1000} bg="#02272b">
           <Center>
             <Grid miw={800} w={1000} mt="xl" gutter="xs">

@@ -51,7 +51,7 @@ export default function MostPlayedTableRow({
         <Stack gap="xs">
           {" "}
           <Group gap="3">
-            <Text size="0.7em" c="white">
+            <Text size="0.7em" py="0.3em" truncate="end" c="white">
               {title} [{version}]
             </Text>
             <Text size="0.6em" c="dimmed">

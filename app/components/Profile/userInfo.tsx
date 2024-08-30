@@ -49,6 +49,8 @@ export function StatsCard({
   params: { slug: string };
 }) {
   const time = convertSeconds(playtime);
+  const label = 200;
+  const lSize = 10;
   return (
     <Stack align="center">
       <Paper
@@ -73,7 +75,7 @@ export function StatsCard({
         <Text ta="center" fw={500} className={classes.title}>
           {name}
         </Text>
-        <Center mt="sm">
+        <Center mt="sm" mb={0}>
           <Image
             src={`https://flagcdn.com/w80/${region}.png`}
             width={24}
@@ -82,76 +84,98 @@ export function StatsCard({
           />
         </Center>
 
-        <Stack gap={0} mt="xl">
+        <Stack gap={0} mt="2em">
           <Group gap="xs">
-            <Text size="xs" fw={500}>
+            <Text size="0.6em" mt="1em" fw={label}>
               Global Rank:
             </Text>
-            <Text size="xs">#{globalRank.toLocaleString("en-US")}</Text>
+            <Text size="0.6em" mt="1em">
+              &nbsp;&nbsp;&nbsp;#{globalRank.toLocaleString("en-US")}
+            </Text>
           </Group>
           <Group gap="xs">
-            <Text size="xs" fw={500}>
+            <Text size="0.6em" mt="1em" fw={label}>
               Country Rank:
             </Text>
-            <Text size="xs">#{countryRank.toLocaleString("en-US")}</Text>
+            <Text size="0.6em" mt="1em">
+              #{countryRank.toLocaleString("en-US")}
+            </Text>
           </Group>
           <Group gap="xs">
-            <Text size="xs" fw={500}>
+            <Text size="0.6em" mt="1em" fw={label}>
               Performance:
             </Text>
-            <Text size="xs">{pp.toLocaleString("en-US")}pp</Text>
+            <Text size="0.6em" mt="1em">
+              &nbsp;{pp.toLocaleString("en-US")}pp
+            </Text>
           </Group>
           <Group gap="xs">
-            <Text size="xs" fw={500}>
+            <Text size="0.6em" mt="1em" fw={label}>
               Play Count:
             </Text>
-            <Text size="xs">{playcount.toLocaleString("en-US")}</Text>
+            <Text size="0.6em" mt="1em">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {playcount.toLocaleString("en-US")}
+            </Text>
           </Group>
           <Group gap="xs">
-            <Text size="xs" fw={500}>
+            <Text size="0.6em" mt="1em" fw={label}>
               Play Time:
             </Text>
-            <Text size="xs">
-              {time.hours}h {time.minutes}m
+            <Text size="0.6em" mt="1em">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{time.hours}h{" "}
+              {time.minutes}m
             </Text>
           </Group>
           <Group gap="xs">
-            <Text size="xs" fw={500}>
+            <Text size="0.6em" mt="1em" fw={label}>
               Total Hits:
             </Text>
-            <Text size="xs">{totalhits.toLocaleString("en-US")}</Text>
+            <Text size="0.6em" mt="1em">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {totalhits.toLocaleString("en-US")}
+            </Text>
           </Group>
           <Group gap="xs">
-            <Text size="xs" fw={500}>
+            <Text size="0.6em" mt="1em" fw={label}>
               Accuracy:{" "}
             </Text>
-            <Text size="xs">{acc.toFixed(2)}%</Text>
+            <Text size="0.6em" mt="1em">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{acc.toFixed(2)}%
+            </Text>
           </Group>
           <Group gap="xs">
-            <Text size="xs" fw={500}>
+            <Text size="0.6em" mt="1em" fw={label}>
               Max Combo:
             </Text>
-            <Text size="xs">{maxcombo.toLocaleString("en-US")}</Text>
+            <Text size="0.6em" mt="1em">
+              &nbsp;&nbsp;&nbsp;{maxcombo.toLocaleString("en-US")}
+            </Text>
           </Group>
           <Group gap="xs">
-            <Text size="xs" fw={500}>
+            <Text size="0.6em" mt="1em" fw={label}>
               Ranked Score:
             </Text>
-            <Text size="xs">{rscore.toLocaleString("en-US")}</Text>
+            <Text size="0.6em" mt="1em">
+              {rscore.toLocaleString("en-US")}
+            </Text>
           </Group>
           <Group gap="xs">
-            <Text size="xs" fw={500}>
+            <Text size="0.6em" mt="1em" fw={label}>
               Total Score:
             </Text>
-            <Text size="xs">{tscore.toLocaleString("en-US")}</Text>
+            <Text size="0.6em" mt="1em">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {tscore.toLocaleString("en-US")}
+            </Text>
           </Group>
         </Stack>
-        <Divider my="xs" />
+        <Divider mt="1em" mb={0} />
         <TimeStamp
           creation_time={creation_time}
           latest_activity={latest_activity}
         />
-        <Divider my="xs" />
+        <Divider my="14" />
         <ModeSwitch params={params} />
       </Paper>
     </Stack>

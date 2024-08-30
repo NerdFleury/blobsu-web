@@ -64,7 +64,7 @@ export async function MiniProfile() {
           </MenuDropdown>
         </Menu>
       ) : (
-        <Group visibleFrom="xs">
+        <Group justify="flex-end" visibleFrom="xs">
           <Button size="xs" variant="filled" component={Link} href={"/create"}>
             Sign Up
           </Button>

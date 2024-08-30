@@ -13,8 +13,12 @@ export default function TimeStamp({
   const theme = useMantineTheme();
   return (
     <>
-      <Text size="xs">{formatRelativeTime(latest_activity)}</Text>
-      <Text size="xs">Registered {formatToMonthsAndYears(creation_time)}</Text>
+      <Text size="0.5em" mt="1.5em">
+        {formatRelativeTime(latest_activity)}
+      </Text>
+      <Text size="0.5em" mt="1em">
+        Registered {formatToMonthsAndYears(creation_time)}
+      </Text>
     </>
   );
 }

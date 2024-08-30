@@ -38,7 +38,7 @@ export function Header({ children }: { children: ReactElement }) {
         <UnstyledButton component={Link} href="/" mt="0.5em" visibleFrom="xs">
           <Image src={BlobsuLogo} width={48} height={48} alt="logo" />
         </UnstyledButton>
-        <Group justify="flex-end" gap={5} visibleFrom="xs">
+        <Group justify="flex-end" w="55%" gap={5} visibleFrom="xs">
           {items}
         </Group>
         {icon}

@@ -31,7 +31,7 @@ export default function TopPlaysTableRow({
   return (
     <Paper shadow="0" radius={0} h="40" p="0">
       <Group maw="100%" justify="space-between" bg="#022226">
-        <Group w={"85%"}>
+        <Group h={"100%"} w={"85%"}>
           <Image
             src={`https://assets.ppy.sh/beatmaps/${set_id}/covers/list@2x.jpg?`}
             height={40}
@@ -40,8 +40,8 @@ export default function TopPlaysTableRow({
           />
           <Stack gap="xs">
             {" "}
-            <Group gap={"0.3em"}>
-              <Text size="0.7em" c="white">
+            <Group w={400} gap={"0.3em"}>
+              <Text truncate="end" py="0.3em" size="0.7em" c="white">
                 {title} [{version}]
               </Text>
             </Group>
