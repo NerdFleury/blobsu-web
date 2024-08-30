@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { number, z } from "zod";
 
 const nameSchema = z
   .string()
@@ -19,10 +19,16 @@ const nameSchema = z
 const passwordSchema = z
   .string()
   .min(8, "Password must be at least 8 characters long")
-  .max(15, "Password must be at most 15 characters long")
-  .regex(
-    /^(?=.*[0-9!@#$%^&*()_+])[A-Za-z0-9!@#$%^&*()_+]{8,15}$/,
-    "Password must contain at least one special character or number"
+  .max(32, "Password must be at most 32 characters long")
+  .refine(
+    (value) => {
+      const uniqueChars = new Set(value);
+
+      return uniqueChars.size >= 3;
+    },
+    {
+      message: "Password must have more than 3 unique characters",
+    }
   );
 
 const schema = z
